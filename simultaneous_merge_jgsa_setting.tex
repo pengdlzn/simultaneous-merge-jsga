@@ -1,0 +1,111 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%FINAL VERSION:
+%look for numbered but unlabelled equations
+%\usepackage{refcheck}%compile twice in order to see the effects
+%Acknowledgments
+
+\usepackage{epstopdf}% To incorporate .eps illustrations using PDFLaTeX, etc.
+%\usepackage{subfigure}% Support for small, `sub' figures and tables
+
+%
+\smartqed  % flush right qed marks, e.g. at end of proof
+%
+\usepackage{graphicx}
+%
+% \usepackage{mathptmx}      % use Times fonts if available on your TeX system
+%
+% insert here the call for the packages your document requires
+%\usepackage{latexsym}
+% etc.
+%
+% please place your own definitions here and don't use \def but
+% \newcommand{}{}
+%
+
+\usepackage[labelfont=bf]{caption}
+%\usepackage{capt-of}
+\usepackage{subcaption} %for subfigure
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\usepackage{natbib}% Citation support using natbib.sty
+\bibpunct[, ]{(}{)}{,}{a}{}{,}% Citation support using natbib.sty
+\renewcommand\bibfont{\fontsize{10}{12}\selectfont}% Bibliography support using natbib.sty
+
+
+\usepackage{xurl} %make a link to break at the page margin
+\usepackage{booktabs} %for \toprule
+
+
+
+
+
+%\theoremstyle{plain}% Theorem-like structures
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{proposition}[theorem]{Proposition}
+%
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{example}[theorem]{Example}
+%
+%\theoremstyle{remark}
+%\newtheorem{remark}{Remark}
+%\newtheorem{notation}{Notation}
+
+
+\usepackage{xspace}
+\usepackage{mathtools}
+\usepackage{fancyvrb} %for \begin{Verbatim} environment; color in verbatime
+%\usepackage[T1]{fontenc}
+\usepackage[defaultlines=3,all]{nowidow}
+
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\lstset{upquote=true}
+
+\usepackage{url}
+
+%so that we have more tolerance for large figures
+%large figure is less likely to push to the end of the document
+\renewcommand{\textfraction}{0.01}
+\renewcommand{\topfraction}{0.99}
+\renewcommand{\bottomfraction}{0.99}
+\renewcommand{\dbltopfraction}{0.99} % fit big float above 2-col. text
+
+\graphicspath{{images/}}
+
+\newcommand{\Astar}{A$^{\!\star}$\xspace}
+
+\newcommand{\e}[1]{\times 10^{#1}}
+\newcommand{\fig}{Figure~}
+\newcommand{\eq}{Equation~}
+\newcommand{\fo}{Formula~}
+\newcommand{\sect}{Section~}
+\newcommand{\tabl}{Table~}
+\newcommand{\tabls}{Tables~}
+\newcommand{\chap}{Chapter~}
+\newcommand{\figs}{Figures~}
+\newcommand{\eqs}{Equations~}
+\newcommand{\fos}{Formulas~}
+\newcommand{\sects}{Sections~}
+\newcommand{\appx}{Apendix~}
+
+\newcommand{\chaps}{Chapters~}
+\newcommand{\p}{p.~}
+\newcommand{\pp}{pp.~}
+\newcommand{\eg}{e.g.,}
+\newcommand{\ie}{i.e.,}
+
+
+\makeatletter
+\def\verbatim@font{\normalfont\rmfamily}
+\makeatother
