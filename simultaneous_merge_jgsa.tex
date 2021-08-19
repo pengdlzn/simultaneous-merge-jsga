@@ -21,14 +21,14 @@
 \documentclass[twocolumn]{svjour3}          % twocolumn
 %\setlength\textwidth{140mm}
 %\setlength\textwidth{158.7mm}
-\input{parallel_merge_jgsa_setting}
+\input{simultaneous_merge_jgsa_setting}
 
 % Insert the name of "your journal" with
  \journalname{Journal of Geovisualization and Spatial Analysis}
 %
 \begin{document}
 
-\title{Paralleling generalization operations to support smooth zooming:
+\title{Generalizing simultaneously to support smooth zooming:
 Case study of merging area objects%\thanks{Grants or other notes
 %about the article that should go on the front page should be
 %placed here. General acknowledgments should be placed at the end of the article.}
@@ -79,9 +79,9 @@ then the changes have to happen very fast
 because the map user wants to see the map at the target scale 
 rather soon after applying a zooming operation.
 In order to allow each change has more time to take place, 
-we propose to parallel the merging operations.
-This paper shows the details of finding and processing parallel merging operations.
-We consider that parallel generalization operations
+we propose to merge simultaneously.
+This paper shows the details of finding and processing simultaneous merging operations.
+We consider that generalizing simultaneously
 is an important step towards continuous map generalization.
 \end{abstract}
 
@@ -152,23 +152,23 @@ large and discrete changes usually happen.
 This kind of changes may cause users to lose track of
 their area objects of interest \citep{vanKreveld2001}.
 In order to solve this problem, 
-we smoothly and parallelly generalize the area objects.
+we smoothly and simultaneously generalize the area objects.
 In our setting, each of the area objects has its \emph{semantic property},
 which is also called a \emph{class} (\eg lake, building, and grassland).
 
 
 The main contribution of this paper is 
-to parallel generalization operators,
-which is the first time that the parallelization 
+to generalize simultaneously,
+which is the first time that the simultaneity 
 is explicitly proposed.
-The parallel merging operations must be well distributed,
+The simultaneous merging operations must be well distributed,
 which pushes the boundaries of tGAP and the SSC.
-Because of the parallelization, 
+Because of the simultaneity, 
 we need to snap to the scales with completed generalization operations
 and need to discuss the animation time gained for each generalization operation.
-Note that the concept of our parallel generalization is 
-different from the well-known parallel computing, 
-which simultaneously carries out many calculations.
+%Note that the concept of our parallel generalization is 
+%different from the well-known parallel computing, 
+%which simultaneously carries out many calculations.
 
 
 This paper is organized as follows.
@@ -358,12 +358,12 @@ which guarantees that the distance is a metric.
 \subsection{Paralleling generalization in CMG}
 
 
-Many methods of CMG naturally parallel generalization operators.
-In morphing polylines, the points of the polylines are moved parallelly
+Many methods of CMG naturally simultaneous generalization operators.
+In morphing polylines, the points of the polylines are moved simultaneously
 \citep[\eg][]{Noellenburg2008,Li2017Annealing}.
-\citet{Li2017_Building} parallelly generalized individual buildings.
+\citet{Li2017_Building} simultaneously generalized individual buildings.
 In those methods, the polylines and the buildings 
-were generalized parallelly and independently.
+were generalized simultaneously and independently.
 \citet{Peng2017Building} and \citet{Touya2017Progressive}
 generalized buildings to built-up areas.
 However, there is no simple relationship 
@@ -412,8 +412,8 @@ we merge by gradually expanding an area over another area
 (see \fig\ref{fig:intro}q).\footnote{%
 See the web maps at
 \url{https://congengis.github.io/webmaps/2021/07/merge/}.
-A comparison of the single merging and the parallel merging can be found at 
-\url{https://congengis.github.io/webmaps/2021/07/merge/eg-7-comparer-overlay-single-parallel.html},
+A comparison of the single merging and the simultaneous merging can be found at 
+\url{https://congengis.github.io/webmaps/2021/07/merge/eg-7-comparer-overlay-single-simultaneous.html},
 where the swiper can be moved to see the differences of the two maps at scale, 
 for example, $1:11{,}832$.}
 This expansion can be realized 
@@ -458,8 +458,8 @@ The arrow in the right-hand side indicates the states of zooming out.
 (a--c): All changes are processed in one go.
 (d--j): All changes are sequenced one by one rapidly.
 (k--o): Changes are grouped, resulting in more animation duration for every change.
-%where smooth and parallel changes going on can be found in figure~(r);
-%digital map with smooth and parallel generalization operations.
+%where smooth and simultaneous changes going on can be found in figure~(r);
+%digital map with smooth and simultaneous generalization operations.
 %
 The numbers are the face IDs. 
 Note that the colors of the smaller areas
@@ -481,7 +481,7 @@ adapt to the colors of the larger areas during merging.
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
 \includegraphics[page=5,width=0.95\linewidth]{methodology}
-\caption{The SSC of the parallel merging of \figs\ref{fig:intro}k--o}
+\caption{The SSC of the simultaneous merging of \figs\ref{fig:intro}k--o}
 \end{subfigure}
 \caption{
 In the left SSC, only one merging event is happening 
@@ -523,7 +523,7 @@ while in the right SSC multiple merging events may happen at the same state.
 %    then we get \fig\ref{fig:intro}q.]{
 %\resizebox*{0.48\textwidth}{!}{\includegraphics[page=4,width=0.95\linewidth]{methodology}}}\hfill
 %%
-%\subfigure[The SSC of the parallel merging shown in \figs\ref{fig:intro}k--o.    
+%\subfigure[The SSC of the simultaneous merging shown in \figs\ref{fig:intro}k--o.    
 %    If slicing the SSC with a horizontal plane at $z$-coordinates~$0$, 
 %    $200$,  $400$, $500$, and~$600$,
 %    then we respectively get \figs\ref{fig:intro}k--o.
@@ -571,23 +571,23 @@ Note that the value of a state is also
 the total number of events processed so far.
 
 
-There are two benefits of paralleling merging operations.
-First, parallelization avoids unnatural zooming.
-Without parallelization,
+There are two benefits of merging simultaneously.
+First, the simultaneity avoids unnatural zooming.
+Without the simultaneity,
 sequentially processing generalization operations 
 may result in no change at some locations in a zooming duration, 
 which is unnatural \citep{vanOosterom2014Support}. 
 Therefore, \citet{vanOosterom2014Support} 
-suggested paralleling the generalization operations,
+suggested processing the generalization operations simultaneously,
 but no implementation, testing, or assessment of the idea was provided.
-Second, parallelization brings smoother zooming.
+Second, the simultaneity brings smoother zooming.
 Although the SSC allows to deliver a map at any scale,
 only $16$ frames by default will be created to display in one second.
 When showing an animation zooming, 
 we set $16$ as the default value of frames per second (FPS).
 This value is adequate to provide the visual continuity
 \citep[\p24]{Read2000Film}.
-If the merging operations happen sequentially instead of parallelly,
+If the merging operations happen sequentially instead of simultaneously,
 it is more likely that
 the gap between two frames is larger than the gap between two states.
 Then there is no animation of smooth merging at all.
@@ -597,13 +597,13 @@ then users can only see discrete merging.
 In contrast, if the consecutive frames are 
 \figs\ref{fig:intro}k, \ref{fig:intro}r, and \ref{fig:intro}l,
 then users can really see an ongoing expansion. 
-The more merging operations we parallel, 
+The more merging operations we process simultaneously, 
 the smoother the expansion process seems.
 
 %\textbf{one step 16 frames or one second 16 frames?}
 %answer: one second 16 frames
 
-When merging parallelly,
+When merging simultaneously,
 we require that 
 the area objects involved in different merging events of the same step 
 must not be neighbors, 
@@ -613,7 +613,7 @@ In this way, it is easy for us to maintain the topology of the map.
 %than merging several areas into a single one.
 In order to realize the requirement,
 we block the neighbors of the areas once we have found an event.
-We show a greedy algorithm to find the parallel merging events for each step
+We show a greedy algorithm to find the simultaneous merging events for each step
 in \sect\ref{sec:greedy_algo}.
 Then, we integrate the events into the tGAP database tables
 (\sect\ref{sec:integrate_tgap}),
@@ -655,12 +655,12 @@ computing the weight values and the class similarities.
 
 \fig\ref{fig:greedy_framework} shows the flowchart of our greedy algorithm.
 The process starts with state~$s=0$ and a detailed map of area objects, $|M_0|$.
-Parallel parameter $r_\mathrm{parallel}$ specifies 
+Parallel parameter $r_\mathrm{simul}$ specifies 
 the proportion (\ie~percentage, when multiplied by~$100$) of area objects that
-we expect to merge parallelly.
+we expect to merge simultaneously.
 As a value of percentage, 
-$r_\mathrm{parallel}$ is in the range from~$0\%$ to~$100\%$,
-which means~$r_\mathrm{parallel} \in [0,1]$.
+$r_\mathrm{simul}$ is in the range from~$0\%$ to~$100\%$,
+which means~$r_\mathrm{simul} \in [0,1]$.
 Expression~$|M_s|$ denotes the number of area objects of the map at state~$s$.
 If there is more than one area ($|M_s|>1$),
 then we start finding merging events.
@@ -668,7 +668,7 @@ We first compute the number of areas that we expect to merge by
 \begin{equation}
 \label{eq:n_target}
 n_\mathrm{target} =
-\lceil r_\mathrm{parallel} \cdot |M_s| \rceil,
+\lceil r_\mathrm{simul} \cdot |M_s| \rceil,
 \end{equation}
 where the ceiling function guarantees~$n_\mathrm{target}\ge 1$.
 That is to say, we find at least one event for each step.
@@ -692,8 +692,8 @@ to represent the number of events that actually happened within the step.
 \begin{figure*}[tb]
 \centering
 \includegraphics[page=2]{methodology}
-\caption{The process of finding parallel merging events for a step, 
-    where parallel parameter $r_\mathrm{parallel} = 0.3$.
+\caption{The process of finding simultaneous merging events for a step, 
+    where simultaneous parameter $r_\mathrm{simul} = 0.3$.
     (a) From all the free areas,
 	the least important one is selected to merge into
 	its most compatible neighbor.
@@ -733,7 +733,7 @@ Then, we continue to find more merging events and to block more areas
 If we have found~$n_\mathrm{target}$ events 
 or there is no free area anymore,
 then finding merging events of the step finishes.
-We parallelly merge all the pairs of areas of the found events
+We simultaneously merge all the pairs of areas of the found events
 to generate new areas,
 free all the blocked areas,
 increase state~$s$ by value~$n_\mathrm{event}$,
@@ -745,7 +745,7 @@ The merging events will be stored as records in tGAP database tables
 (see \fig\ref{fig:uml_tgap}).
 \figs\ref{fig:intro}k--o show a sequence of four merging steps
 obtained by our greedy algorithm,
-where parallel parameter~$r_\mathrm{parallel}$ is set to~$0.3$
+where simultaneous parameter~$r_\mathrm{simul}$ is set to~$0.3$
 (Note that this is an extremely high value, 
 just used to explain the principle in an artificial simple example).
 
@@ -766,7 +766,7 @@ as the edges already stores the sequences of points.
 \end{figure*}
 
 
-\subsection{Integrating the parallel events into the tGAP database tables}
+\subsection{Integrating the simultaneous events into the tGAP database tables}
 \label{sec:integrate_tgap}
 
 \citet[\p159]{Meijers2011Thesis} designed three tables 
@@ -788,7 +788,7 @@ When the slicing arrives at the high state,
 the face should have been merged with another area.
 Comparing between the tables of single merging 
 (\figs\ref{fig:intro}d--j)
-and parallel merging (\figs\ref{fig:intro}k--o),
+and simultaneous merging (\figs\ref{fig:intro}k--o),
 we observed some differences of the values.
 For example, the $s_\mathrm{high}$ values of faces~1 and~2 are changed from~1 to~2
 (see \tabl\ref{tbl:face_tgap}).
@@ -839,7 +839,7 @@ $f_\mathrm{id}$& $s_\mathrm{low}$    & $s_\mathrm{merge}$ & $s_\mathrm{high}$ \\
 \hfill
 %
 \begin{subtable}{0.48\textwidth}
-\caption{The face table of the parallel merging 
+\caption{The face table of the simultaneous merging 
     shown in \figs\ref{fig:intro}k--o.}
 \centering
 \begin{tabular}{cccc} %\underbar{2}
@@ -864,7 +864,7 @@ $f_\mathrm{id}$ & $s_\mathrm{low}$   & $s_\mathrm{merge}$ & $s_\mathrm{high}$ \\
 \end{table*}
 
 
-\subsection{Integrating the parallel events into the SSC}
+\subsection{Integrating the simultaneous events into the SSC}
 \label{sec:integrate_ssc}
 
 Recall that we merge a pair of areas by expanding over 
@@ -899,7 +899,7 @@ which is the~$s_\mathrm{high}$ values of areas~1 and~2.
 %those values can be much smaller 
 %than value~$s_\mathrm{high}-1$.
 
-For the case of parallel merging,
+For the case of simultaneous merging,
 if a step consists of~$n_\mathrm{event}$ events and 
 the step finishes at state~$s_\mathrm{high}$, then the step starts 
 at state~$s_\mathrm{merge}=s_\mathrm{high} - n_\mathrm{event}$.
@@ -907,25 +907,25 @@ The reason is that if the~$n_\mathrm{event}$ events
 would happen sequentially (\ie~single merging),
 then they would take place 
 from state~$s_\mathrm{high} - n_\mathrm{event}$ to state~$s_\mathrm{high}$.
-When all the events take place parallelly in the same step, 
+When all the events take place simultaneously in the same step, 
 each of the events can share its merging duration.
-%there is a less important area in each of the parallel events of a merging step.
-%If the number of parallel events is~$n_\mathrm{event}$,
+%there is a less important area in each of the simultaneous events of a merging step.
+%If the number of simultaneous events is~$n_\mathrm{event}$,
 %then there are~$2n_\mathrm{event}$ areas 
 %with the same state\_high value, say,~$s_\mathrm{high}$
 %because each merging event involves two areas.
-%The merging animations of all the parallel events
+%The merging animations of all the simultaneous events
 %start at state~$s_\mathrm{merge}=s_\mathrm{high} - n_\mathrm{event}$
 %and finishes at state~$s_\mathrm{high}$.
-%By definition, the parallel events of a merging step 
+%By definition, the simultaneous events of a merging step 
 %happen during the same animation time.
-%In other words, the areas involved in those parallel events have 
+%In other words, the areas involved in those simultaneous events have 
 %the same state\_merge value ($s_\mathrm{merge}$) and 
 %the same state\_high value ($s_\mathrm{high}$).
 %The reverse is also true.
 %If some areas have the same state\_high value,
 %then those areas happen during the same animation time 
-%(involved in the parallel events of the same step).
+%(involved in the simultaneous events of the same step).
 %The reason is that, according to our requirement,
 %a step can start only when the previous step stops.
 %Thus, the merging events finishing at the same state cannot from different steps.
@@ -936,13 +936,13 @@ each of the events can share its merging duration.
 %Given the fact that the merging duration for zooming 
 %between states~$s_\mathrm{merge}$ and~$s_\mathrm{high}$ is fixed,
 As a result,
-each of the parallel events has more time to take place
+each of the simultaneous events has more time to take place
 than the events would happen sequentially.
 In other words, for a merging step,
 each of the events has more time to take place 
-if there are more parallel events.
+if there are more simultaneous events.
 
-In order to build the SSC for parallel merging,
+In order to build the SSC for simultaneous merging,
 we need the~$s_\mathrm{merge}$ value for each of the merging steps
 so that we know from which state 
 the triangles of the less important areas should be tilted.
@@ -966,7 +966,7 @@ recorded in column~$s_\mathrm{high}$ of the face table
 (\eg~\tabl\ref{tbl:face_tgap}b).
 Expression~$[s=s_\mathrm{high}]$ returns~$1$ if the two values are equal 
 and returns~$0$ otherwise.
-As illustrated before, the state at which the parallel merging starts 
+As illustrated before, the state at which the simultaneous merging starts 
 can be computed by
 \begin{equation*}
 \label{eq:s_merge_state}
@@ -1014,7 +1014,7 @@ Take the sequence of \fig\ref{fig:intro}k--o for example,
 the merging animation should stop at 
 either \ref{fig:intro}k or \ref{fig:intro}l,
 but not at \ref{fig:intro}r.
-Note that some states are not valid because of the parallel events.
+Note that some states are not valid because of the simultaneous events.
 For example, state~$1$ is not valid 
 for the sequence of \fig\ref{fig:intro}k--o.
 In that example, the list of valid states 
@@ -1023,11 +1023,11 @@ In order to snap to one of the valid states after a zooming operation,
 we have to communicate them to the client side. 
 There are multiple options. 
 The most simple one assumes that, 
-during the creation of the parallel SSC, 
+during the creation of the simultaneous SSC, 
 we can always perform the~$n_\mathrm{target}$ number of events in all steps. 
 In that case, we just have to communicate 
-the number of areas and the ratio~$r_\mathrm{parallel}$. 
-In case of high value ratios (\eg~$r_\mathrm{parallel} > 0.01$), 
+the number of areas and the ratio~$r_\mathrm{simul}$. 
+In case of high value ratios (\eg~$r_\mathrm{simul} > 0.01$), 
 this assumption may be incorrect. 
 We then have to communicate the valid states by sending them explicitly. 
 Because this list may get rather large,
@@ -1120,7 +1120,7 @@ which is also the case in our paper
 This section formalizes the relationship of the animation duration,
 the zooming duration, the zooming factor, and the number of events.
 In a zooming duration, there can be many merging steps,
-no matter single merging or parallel merging.
+no matter single merging or simultaneous merging.
 The formalization is based on the setting that
 a zooming duration is divided equally by its merging steps
 (\citet[][\sect6.7]{Suba2017Thesis} showed some other possible settings).
@@ -1133,16 +1133,16 @@ Let $N_\mathrm{event}$ be the number of events happening in a zooming duration.
 Let $n_\mathrm{step}$ be the number of steps happening in the zooming duration.
 Let $t_\mathrm{single}$ be the animation duration of each of the steps,
 where each step consists of only one event.
-Let $t_\mathrm{parallel}$ be the animation duration of each of the steps,
+Let $t_\mathrm{simultaneous}$ be the animation duration of each of the steps,
 where each step consists of at least one event.
 Then, we have 
 \begin{equation}
 \label{eq:t_compare}
-t_\mathrm{parallel} = t_\mathrm{single}  \frac{N_\mathrm{event}}{n_\mathrm{step}}.
+t_\mathrm{simultaneous} = t_\mathrm{single}  \frac{N_\mathrm{event}}{n_\mathrm{step}}.
 \end{equation}
 As~$N_\mathrm{event}$ is larger than or equal to~$n_\mathrm{step}$,
-we have $t_\mathrm{parallel} \ge t_\mathrm{single}$.
-That is to say, when paralleling the events,
+we have $t_\mathrm{simultaneous} \ge t_\mathrm{single}$.
+That is to say, when processing the merging events simultaneously,
 each step has more time to take place. 
 The derivation of \eq\ref{eq:t_compare} is shown 
 in \appx\ref{appx:animation_duration_event}.
@@ -1216,16 +1216,16 @@ the scale denominator will arrive at~$1{,}150{,}565.1$
 according to \eq\ref{eq:S_t_snap}.
 At that moment, all the areas are merged into one single area.
 %(see \figs\ref{fig:data}b).
-In each step, we want to parallelly merge some proportion of the areas.
+In each step, we want to simultaneously merge some proportion of the areas.
 We tried three cases: 0.1\%, 1\%, and 10\%.
-That is, parallel parameter~$r_\mathrm{parallel}=0.001, 0.01, \text{and~} 0.1$ 
+That is, simultaneous parameter~$r_\mathrm{simul}=0.001, 0.01, \text{and~} 0.1$ 
 (see \sect\ref{sec:greedy_algo}), 
 which are independent of the size of the map dataset.
 The three versions of map can be browsed online.\footnote{%
 All of our web maps can be found at
 \url{https://congengis.github.io/webmaps/2020/05/merge/}.}
 \fig\ref{fig:web_map} shows two examples of our web map when 
-parallel parameter~$r_\mathrm{parallel}=0.01$.
+simultaneous parameter~$r_\mathrm{simul}=0.01$.
 
 
 \begin{figure}[tb]
@@ -1248,7 +1248,7 @@ parallel parameter~$r_\mathrm{parallel}=0.01$.
 \centering
 \includegraphics[page=1,scale=0.6]{case_study}
 \caption{An overview map. The map is generated from the base map 
-    by parallel merging with parameter~$r_\mathrm{parallel}= 0.01$.}
+    by simultaneous merging with parameter~$r_\mathrm{simul}= 0.01$.}
 \end{subfigure}
 \newline
 \vspace{0.5cm}
@@ -1265,11 +1265,11 @@ parallel parameter~$r_\mathrm{parallel}=0.01$.
 \end{figure*}
 
 Some statistics of the results when 
-parallel parameter~$r_\mathrm{parallel}=0.001$, $0.01$, or $0.1$ 
-are shown in \tabl\ref{tbl:parallel_param_comparison}.
+simultaneous parameter~$r_\mathrm{simul}=0.001$, $0.01$, or $0.1$ 
+are shown in \tabl\ref{tbl:simultaneous_param_comparison}.
 According to column~$N_\mathrm{step}$,
 the number of steps decreases 
-when the parallel parameter increases.
+when the simultaneous parameter increases.
 This is reasonable because more areas will be merged in each step.
 As explained in \sect\ref{sec:greedy_algo}, 
 for each merging step we iteratively select the least important area 
@@ -1278,21 +1278,21 @@ then, we block the neighbors of the two areas.
 Sometimes, a least important area is already blocked 
 because of the previously found events.
 This situation happens~$2{,}714$ times in total for all the steps
-when parallel parameter~$r_\mathrm{parallel}=0.01$
-(see column~$N_\mathrm{blocked}$ of \tabl\ref{tbl:parallel_param_comparison}).
+when simultaneous parameter~$r_\mathrm{simul}=0.01$
+(see column~$N_\mathrm{blocked}$ of \tabl\ref{tbl:simultaneous_param_comparison}).
 %
 Sometimes, although a least important area is free, 
 its most compatible neighbor has been blocked 
 because of the previously found events.
 This case happens~$1{,}383$ times in total for all the steps
-when parallel parameter~$r_\mathrm{parallel}=0.01$
-(see column~$n_\mathrm{nbr\_blocked}$ of \tabl\ref{tbl:parallel_param_comparison}).
+when simultaneous parameter~$r_\mathrm{simul}=0.01$
+(see column~$n_\mathrm{nbr\_blocked}$ of \tabl\ref{tbl:simultaneous_param_comparison}).
 %
 According to the statistics, we encounter more cases of the areas blocked
 when merging a larger proportion of the area objects.
 However, we can still reach our target number of events perfectly 
-for settings of~$r_\mathrm{parallel}=0.01$ or~$r_\mathrm{parallel}=0.001$. 
-Only when we push beyond the limit (\eg~$r_\mathrm{parallel}=0.1$), 
+for settings of~$r_\mathrm{simul}=0.01$ or~$r_\mathrm{simul}=0.001$. 
+Only when we push beyond the limit (\eg~$r_\mathrm{simul}=0.1$), 
 we can not reach the target number of events in a step 
 (and we need correction information 
 to compute the actual number of achieved events). 
@@ -1303,8 +1303,8 @@ if there is hardly any free choice when generalizing.
 
 \begin{table}[tb]
 \centering
-\caption{Some statistics when different parallel parameters area used 
-    (\ie~$r_\mathrm{parallel}=0.001$, $0.01$, and $0.1$).
+\caption{Some statistics when different simultaneous parameters area used 
+    (\ie~$r_\mathrm{simul}=0.001$, $0.01$, and $0.1$).
     Column~$N_\mathrm{step}$ records the number of steps to transit 
     from the base map to the map with a single area.    
     Column~$N_\mathrm{blocked}$ records the number of times
@@ -1314,7 +1314,7 @@ if there is hardly any free choice when generalizing.
 }
 \begin{tabular}{rrrr}
 \toprule
-$r_\mathrm{parallel}$   & $N_\mathrm{step}$ & $N_\mathrm{blocked}$  & $N_\mathrm{nbr\_blocked}$ \\ \midrule
+$r_\mathrm{simul}$   & $N_\mathrm{step}$ & $N_\mathrm{blocked}$  & $N_\mathrm{nbr\_blocked}$ \\ \midrule
 0.001                   &  3{,}195          &       211             &       72                  \\
 0.01                    &  544              &   2{,}714             &  1{,}383                  \\
 0.1                     &  91               & 100{,}617             & 34{,}268                  \\ 
@@ -1322,7 +1322,7 @@ $r_\mathrm{parallel}$   & $N_\mathrm{step}$ & $N_\mathrm{blocked}$  & $N_\mathrm
 \end{tabular}
 %\begin{tabular}{cccc}
 %\hline
-%$r_\mathrm{parallel}$ & 0.001       & 0.01          & 0.1    \\ \hline
+%$r_\mathrm{simul}$ & 0.001       & 0.01          & 0.1    \\ \hline
 %eventdiff\_repetition & [[0, 3195]] & [[0, 544]]    & $L_{\mathrm{diff\_rep}, 0.1}$   \\
 %least face blocked    & 228            & 3{,}216         & 105{,}980       \\
 %best neighbor blocked & 72            & 1{,}841        & 38{,}232 \\ \hline 
@@ -1341,27 +1341,28 @@ $r_\mathrm{parallel}$   & $N_\mathrm{step}$ & $N_\mathrm{blocked}$  & $N_\mathrm
 %    [6, 1], [7, 1], [4, 1], [5, 1], [4, 1], [5, 2], [7, 1], [5, 1], [4, 1], [5, 1], [3, 1], [4, 1], [3, 3], [2, 2], [1, 2], [2, 1], 
 %    [1, 2], [2, 1], [1, 3], [0, 2], [1, 2], [0, 14]]
 %\end{Verbatim}
-\label{tbl:parallel_param_comparison}
+\label{tbl:simultaneous_param_comparison}
 \end{table}
 
 
 
 As we can find the target numbers of merging events for all the steps
-when parallel parameter~$r_\mathrm{parallel}= 0.001$ or~$0.01$, 
+when simultaneous parameter~$r_\mathrm{simul}= 0.001$ or~$0.01$, 
 the corresponding exceptions lists are empty.
-%For example, when~$r_\mathrm{parallel}= 0.01$,
+%For example, when~$r_\mathrm{simul}= 0.01$,
 %The content of the JSON file is as following.
 %\begin{verbatim}
 %                {
 %                    "face_num": 13238,
-%                    "parallel_param": 0.01,                    
+%                    "simultaneous_param": 0.01,                    
 %                    "step_eventdiff": []
 %                }
 %\end{verbatim}
-When~$r_\mathrm{parallel}= 0.1$,
-the exception list is~$[[1, 1304], [2, 1070], \dots, [77, 2]]$,
+When~$r_\mathrm{simul}= 0.1$,
+the exception list is
+$$[[1, 1304], [2, 1070], \dots, [77, 2]],$$
 which has~$71$ pairs of values.
-In reality, we would not use~$r_\mathrm{parallel}= 0.1$
+In reality, we would not use~$r_\mathrm{simul}= 0.1$
 (merging~$10\%$ of the current areas in every step)
 because it is an unrealistic high value.
 Using such a high value results in a multi-scale representation
@@ -1376,21 +1377,21 @@ arbitrary scales.
 We set zooming factor~$f_\mathrm{zoom}=1$ and 
 zooming duration~$t_\mathrm{zoom}=1 s$ 
 (see \sect\ref{sec:zooming_duration}).
-When zooming on our web maps with different parallel parameters,
+When zooming on our web maps with different simultaneous parameters,
 we observed that the impressions of the maps 
 based on single merging\footnote{%
 See the web map at
 \url{https://congengis.github.io/webmaps/2020/05/merge/single-merging/}.} 
-and based on parallel merging with parameter~$r_\mathrm{parallel}= 0.001$ 
+and based on simultaneous merging with parameter~$r_\mathrm{simul}= 0.001$ 
 are almost the same.
 The reason is that the smooth merging happens too fast,
 and we cannot really see the merging animation.
-We get the feeling of smooth merging when~$r_\mathrm{parallel}= 0.01$.
-When~$r_\mathrm{parallel}= 0.1$, the smooth merging is already obvious.
+We get the feeling of smooth merging when~$r_\mathrm{simul}= 0.01$.
+When~$r_\mathrm{simul}= 0.1$, the smooth merging is already obvious.
 In order to show a better comparison of single merging 
-and parallel merging,
+and simultaneous merging,
 we put two maps together (see \fig\ref{fig:comparison}),
-where the parallel parameter is~$0.1$.\footnote{%
+where the simultaneous parameter is~$0.1$.\footnote{%
 See the map of comparison at
 \url{https://congengis.github.io/webmaps/2020/05/merge/0.1/comparer.html}.}  
 
@@ -1400,8 +1401,8 @@ See the map of comparison at
 \includegraphics[page=3,scale=0.6]{case_study}
 \caption{
     The map to the left of the slider is based on single merging,
-    and the one to the right is based on parallel merging
-    with~$r_\mathrm{parallel}= 0.1$.
+    and the one to the right is based on simultaneous merging
+    with~$r_\mathrm{simul}= 0.1$.
     The slider can be moved to tune the widths of the two map canvases.
     The two maps are very different, and 
     we can observe some sudden changes across the slider.
@@ -1409,7 +1410,7 @@ See the map of comparison at
 \label{fig:comparison}
 \end{figure}
 
-When parallel parameter~$r_\mathrm{parallel}$ is set to~$0.1$,
+When simultaneous parameter~$r_\mathrm{simul}$ is set to~$0.1$,
 we noticed a problem in the northeastern corner of the map.
 That is, some tiny and relatively unimportant areas stay 
 until the scale is very small,
@@ -1422,7 +1423,7 @@ In each step, only one of the buildings will be merged into the surrounding area
 because an area is allowed to merge with only one area in each step.
 In the meantime, the areas at other places of the map merge relatively fast
 because we allow $10\%$ of the areas to be merged in each step.
-Fortunately, we would not need to use such a big parallel parameter in reality.
+Fortunately, we would not need to use such a big simultaneous parameter in reality.
 
 
 %To fix the problem, we should allow a surrounding area 
@@ -1435,15 +1436,15 @@ Fortunately, we would not need to use such a big parallel parameter in reality.
 
 \subsection{Conclusion}
 %For the first time, 
-This paper investigates on paralleling generalization operations,
+This paper investigates on processing generalization operations simultaneously,
 using the merging operation as a case study. 
-The purpose of having parallel generalization operations 
+The purpose of having simultaneous generalization operations 
 is to have smoother zooming experience later on 
 (compared to the pure sequenced individual generalization events)
 so that users can better keep their context during zooming.
-This paper develops a greedy algorithm to find parallel events of 
+This paper develops a greedy algorithm to find simultaneous events of 
 merging area objects.
-Then, the parallel events are integrated into 
+Then, the simultaneous events are integrated into 
 the tGAP and the SSC to nicely visualize the merging animations.
 %This paper also proposed a strategy 
 %to concisely store the number of merging events for all the steps.
@@ -1452,12 +1453,12 @@ we managed to snap zooming operations to valid states.
 This paper also presents a recipe 
 to define the animation duration of an event.
 According to our case study,
-the events of parallel merging 
+the events of simultaneous merging 
 can be better observed than the events of single merging.
 This result shows the potential that
 users can keep their context better 
 and can have smoother map interaction experience
-when zooming on a map based on parallel-event operations.
+when zooming on a map based on simultaneous-event operations.
 
 
 
@@ -1486,7 +1487,7 @@ and will be presented in another paper in future.
 
 
 This paper used a greedy algorithm 
-to find parallel merging events for each step.
+to find simultaneous merging events for each step.
 Alternatively, it is possible to define merging steps 
 by selecting and combining some single-event steps of a sequence found 
 by some existing methods
@@ -1548,9 +1549,9 @@ to guide our generalization choices
 
 To avoid clutter of vertices for zooming out, 
 it is necessary to simplify the boundaries of the areas.
-Many existing methods could be integrated into our parallel paradigm.
+Many existing methods could be integrated into our simultaneous paradigm.
 \citet{Meijers2011LineSimp} proposed a method 
-to simplify the boundaries parallelly. 
+to simplify the boundaries simultaneously. 
 Their results are topologically safe. 
 Another choice would be the method of \citet{ImaiIri1988},
 which is able to minimize the number of vertices 
@@ -1562,7 +1563,7 @@ In the SSC, we could build some tilted walls
 to connect the two levels of compatible triangulations.
 When we slice this SSC to animate a zooming action,
 the boundaries of the areas are morphed 
-(moved smoothly and parallelly)
+(moved smoothly and simultaneously)
 between a detailed representation and a coarse representation.
 We can imagine that it is challenging to build the tilted walls.
 Furthermore, we would like to 
@@ -1583,13 +1584,13 @@ Then, we have the opportunity to store all the updates along time in the tessera
 By ``slicing'' it, we will be able to output a map at any scale and any time point.
 
 
-This paper develops the technique for smooth zooming based on parallel merging,
+This paper develops the technique for smooth zooming based on simultaneous merging,
 and we hope that it allows map users to follow the zooming more easily.
 A future work is to investigate 
 how much map users benefit from our technique.
 We will conduct some usability tests based on the experience of
 \citet[\sect6.7]{Suba2017Thesis} and \citet{Midtbo2007}.
-Another future work is to find optimal parallel parameters for 
+Another future work is to find optimal simultaneous parameters for 
 different kinds of datasets.
 
 
@@ -1615,7 +1616,7 @@ different kinds of datasets.
 %What algorithm should we use 
 %(\eg~dynamic programming, \Astar, or integer linear programming)?
 %How much time is gained for users to observe the merging steps on the screen?
-%How to store the parallel merging steps?
+%How to store the simultaneous merging steps?
 
 
 
@@ -1748,14 +1749,14 @@ On the server side,
 we compute the values shown in \tabl\ref{tbl:sequence_greedy}.
 These values are for merging sequence of \fig\ref{fig:intro}k--o 
 (also see \tabl\ref{tbl:face_tgap}b),
-where parallel parameter~$r_\mathrm{parallel}$ was set to~$0.3$.
+where simultaneous parameter~$r_\mathrm{simul}$ was set to~$0.3$.
 Note that this parameter value is extremely high, 
 just used to explain the principle in an artificial simple example.
 The computation starts from step~$1$.
 At the beginning, there are $7$ areas on the map, \ie~$|M_0| = 7$.
 According to \eq\ref{eq:n_target},
-our target is to parallel three events ($n_{\mathrm{target},1} = 3$).
-However, only two event can be paralleled in step~$1$ 
+our target is to process three events simultaneously ($n_{\mathrm{target},1} = 3$).
+However, only two event can be processed in step~$1$ 
 because some areas are blocked
 (see \fig\ref{fig:blocked_polygons}b).
 Therefore, we have~$n_{\mathrm{event},1} = 2$.
@@ -1818,9 +1819,9 @@ where variable~$n_{\mathrm{area},i}$ denotes the area number
 at the low state of step~$i$.
 Furthermore, the state-low value of step~$i+1$ (\ie~$s_{\mathrm{low},i+1}$) 
 is the same as the state-high value of step~$i$ (\ie~$s_{\mathrm{high},i}$).
-Again, the target number of parallel events (\ie~$n_{\mathrm{target},i+1}$)
+Again, the target number of simultaneous events (\ie~$n_{\mathrm{target},i+1}$)
 is computed by \eq\ref{eq:n_target},
-the number of actual parallel events is obtained from the greedy algorithm,
+the number of actual simultaneous events is obtained from the greedy algorithm,
 %the value of difference (\ie~$n_{\mathrm{diff},i+1}$) 
 %is computed by \eq\ref{eq:n_diff}, 
 and the state-high value (\ie~$s_{\mathrm{high},i+1}$) 
@@ -1857,7 +1858,7 @@ The \emph{exception list} is~$[[1, 2]]$ for the example of \tabl\ref{tbl:sequenc
 For the pair of values in the inner square brackets,
 the first one represents the step,
 and the second value represents the actual number of events~$n_\mathrm{event}$.
-The exception list, the number of faces, and the parallel parameter 
+The exception list, the number of faces, and the simultaneous parameter 
 will be sent to the client side.
  
 %Take \tabl\ref{tbl:sequence_greedy} for example,
@@ -1866,7 +1867,7 @@ will be sent to the client side.
 %\begin{verbatim}
 %                {
 %                    "face_num": 7,
-%                    "parallel_param": 0.3,                    
+%                    "simultaneous_param": 0.3,                    
 %                    "step_eventdiff": [[1, 1]]
 %                }
 %\end{verbatim}
@@ -1894,7 +1895,7 @@ will be sent to the client side.
 %\begin{verbatim}
 %                {
 %                    "face_num": 7,
-%                    "parallel_param": 0.3,                    
+%                    "simultaneous_param": 0.3,                    
 %                    "step_eventdiff": [[1, 1]]
 %                }
 %\end{verbatim}
@@ -1911,7 +1912,7 @@ will be sent to the client side.
 
 When a user opens our web map,
 the client side receives the exception list, the number of faces, 
-and the parallel parameter from the server side.
+and the simultaneous parameter from the server side.
 %the JSON file will be sent to the client side.
 %We can unpack the content of entry ``step\_eventdiff'' and 
 %get the list of $n_\mathrm{diff}$ values~$[1, 0, 0, 0]$.
@@ -1921,10 +1922,10 @@ If so, the event value of step~$i$ from the list
 is assigned to~$n_{\mathrm{event},i}$.
 If not, value~$n_{\mathrm{target},i}$ (see \eq\ref{eq:n_target})
 is computed and assigned to~$n_{\mathrm{event},i}$.
-%where parallel parameter~$r_\mathrm{parallel}=0.3$ 
+%where simultaneous parameter~$r_\mathrm{simul}=0.3$ 
 %and face number~$n_{\mathrm{area},1} = 7$
 %can be obtained also from the JSON file.
-%Then, we can compute the actual number of parallel events by
+%Then, we can compute the actual number of simultaneous events by
 %\begin{equation*}
 %\label{eq:n_event_step}
 %n_{\mathrm{event},i} = n_{\mathrm{target},i} - n_{\mathrm{diff},i},
@@ -2005,19 +2006,19 @@ t_\mathrm{single}   = \frac{t_\mathrm{snap}}{N_\mathrm{event}}
                     = \frac{t_\mathrm{zoom}}{E_\mathrm{o} - E_\mathrm{t,snap}}.
 \end{equation}
 
-If we parallel these events, 
+If we process these events simultaneously, 
 then we will have fewer steps and 
 each event has more time to take place.
 Let~$n_\mathrm{step}$ be the number of steps in a zooming duration.
 If we are lucky enough so that
-expression~$r_\mathrm{parallel} \cdot |M_s|$ of \eq\ref{eq:n_target}
+expression~$r_\mathrm{simul} \cdot |M_s|$ of \eq\ref{eq:n_target}
 always returns an integer, 
 then we do not need the ceiling function of \eq\ref{eq:n_target}
 (if we are not that lucky, the value of~$n_\mathrm{step}$ will be slightly different).
 We have 
 \begin{equation*}
 %\label{eq:n_event}
-N_\mathrm{t,snap} (1-r_\mathrm{parallel})^{n_\mathrm{step}} = N_\mathrm{o,snap},
+N_\mathrm{t,snap} (1-r_\mathrm{simul})^{n_\mathrm{step}} = N_\mathrm{o,snap},
 \end{equation*}
 where~$N_\mathrm{t,snap} = N_\mathrm{b}- E_\mathrm{t,snap}$ 
 is the number of areas at scale~$1:S_\mathrm{t,snap}$,
@@ -2026,25 +2027,25 @@ is the number of areas at scale~$1:S_\mathrm{o,snap}$.
 Then, the number of steps can be computed by
 \begin{equation*}
 %\label{eq:n_event}
-n_\mathrm{step} = \log_{1-r_\mathrm{parallel}} 
+n_\mathrm{step} = \log_{1-r_\mathrm{simul}} 
     \frac{N_\mathrm{o,snap}}{N_\mathrm{t,snap}}.
 \end{equation*}
 Because the steps happen sequentially,
 each of the steps in the zooming duration has
 animation duration
 \begin{equation}
-\label{eq:t_parallel}
-t_\mathrm{parallel} = \frac{t_\mathrm{snap}}{n_\mathrm{step}},
+\label{eq:t_simultaneous}
+t_\mathrm{simultaneous} = \frac{t_\mathrm{snap}}{n_\mathrm{step}},
 \end{equation}
-which is also the animation duration of each of the parallel events.
-Putting \eqs\ref{eq:t_single} and~\ref{eq:t_parallel} together,
+which is also the animation duration of each of the simultaneous events.
+Putting \eqs\ref{eq:t_single} and~\ref{eq:t_simultaneous} together,
 we have
 \begin{equation*}
 \label{eq:t_compare_appx}
-t_\mathrm{parallel} = t_\mathrm{single}  \frac{N_\mathrm{event}}{n_\mathrm{step}}.
+t_\mathrm{simultaneous} = t_\mathrm{single}  \frac{N_\mathrm{event}}{n_\mathrm{step}}.
 \end{equation*}
 As~$N_\mathrm{event}$ is larger than or equal to~$n_\mathrm{step}$,
-$t_\mathrm{parallel}$ is also larger than or equal to~$t_\mathrm{single}$.
+$t_\mathrm{simultaneous}$ is also larger than or equal to~$t_\mathrm{single}$.
 
 
 When we zoom in back from scale~$S_\mathrm{o,snap}$ to scale~$S_\mathrm{t}$, 
