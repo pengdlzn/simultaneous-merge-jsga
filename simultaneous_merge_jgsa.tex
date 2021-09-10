@@ -26,6 +26,9 @@
 % Insert the name of "your journal" with
  \journalname{Journal of Geovisualization and Spatial Analysis}
 %
+
+\usepackage[disable]{todonotes}
+
 \begin{document}
 
 \title{Generalizing simultaneously to support smooth zooming:
@@ -64,22 +67,22 @@ Case study of merging area objects%\thanks{Grants or other notes
 \begin{abstract}
 When users zoom out on a digital map, 
 some area objects become too tiny to be seen, 
-resulting in visual clutters. 
+resulting in visual clutter. 
 To avoid this problem, 
 we merge the relatively unimportant areas into their neighbors to form larger areas.
-However, if several areas are merged into an area in a single operation,
+However, if two areas are merged into an area in a single step operation,
 then it is a large and discrete change, 
-which confuses map users.
+which disturbs map users.
 In order to provide small and smooth changes,
 this paper merges a pair of areas by expanding one
 (winner) over the other (loser).
-At the same time, the loser gradually adapts its color do the winner.
+At the same time, the loser gradually adapts its color to the winner.
 However, if the changes happen sequentially,
 then the changes have to happen very fast 
 because the map user wants to see the map at the target scale 
 rather soon after applying a zooming operation.
-In order to allow each change has more time to take place, 
-we propose to merge simultaneously.
+In order to ensure that every change has more time to take place, 
+we propose to merge multiple areas simultaneously.
 This paper shows the details of finding and processing simultaneous merging operations.
 We consider that generalizing simultaneously
 is an important step towards continuous map generalization.
@@ -95,13 +98,12 @@ When users are reading a digital map,
 they expect different levels of detail (LoDs) depending on the scale.
 For example, they may want to see individual buildings when zooming in
 and see built-up areas when zooming out.
-That is why geographical information is dependent on the scale
+That is why depicting geographical information is dependent on the scale
 \citep{Muller1995Generalization,Weibel1997}. 
 In order to prepare map data for different scales,
 a detailed map is generalized to generate coarser data 
 for maps at smaller scales,
 which is known as map generalization.
-%A lot of research has been devoted to map generalization.
 \citet{Mackaness2017Generalization} gave a taxonomy of 
 generalization algorithms, 
 including selection, simplification, aggregation, and so on.
@@ -111,7 +113,7 @@ maps at different scales and to send proper data to clients on request
 However, large and discrete changes between different map representations
 may confuse users,
 so continuous map generalization (CMG) is needed to
-provide smooth scale transition.
+provide smooth scale transitions.
 Algorithms of CMG have been proposed 
 to morph raster maps
 \citep[\eg][]{Pantazis2009a,Pantazis2009b}, 
@@ -154,21 +156,16 @@ their area objects of interest \citep{vanKreveld2001}.
 In order to solve this problem, 
 we smoothly and simultaneously generalize the area objects.
 In our setting, each of the area objects has its \emph{semantic property},
-which is also called a \emph{class} (\eg lake, building, and grassland).
+which is also called a \emph{class} (\eg\ lake, building, and grassland).
 
 
 The main contribution of this paper is 
 to generalize simultaneously,
 which is the first time that the simultaneity 
 is explicitly proposed.
-The simultaneous merging operations must be well distributed,
-which pushes the boundaries of tGAP and the SSC.
 Because of the simultaneity, 
-we need to snap to the scales with completed generalization operations
-and need to discuss the animation time gained for each generalization operation.
-%Note that the concept of our parallel generalization is 
-%different from the well-known parallel computing, 
-%which simultaneously carries out many calculations.
+we propose to snap to the scales with completed generalization operations
+and we discuss the animation time gained for each generalization operation.
 
 
 This paper is organized as follows.
@@ -185,7 +182,10 @@ and present our future work.
 
 %\subsection{Generalization of area objects (maybe)}
 
-
+\todo[inline]{Would be nice to include some illustrations from related work,
+may be best 1 or 2 illustrations from our own earlier work. 
+add eater and hierarchies of classes.
+}
 
 
 \subsection{Aggregation of area objects}
@@ -240,7 +240,7 @@ To provide scale transition of small changes,
 the Generalized Area Partitioning (GAP) tree,
 where in each step the least important area is merged into
 its most compatible neighbor.
-Because that method works only on a topological map,
+Because that method works only on direct neighbors,
 \citet{Ai2002GAP} made an extension to GAP-tree,
 where they connected two close neighboring areas 
 by filling the gap identified by the constrained Delaunay triangulation.
@@ -262,7 +262,8 @@ Taking into account the local condition of the face
 (\eg~no compatible neighbor at the same side of the road),
 they may take different decisions for the face: 
 put it back with a higher importance, collapse it, 
-or merge it into an adjacent face.
+or merge it into an adjacent face, 
+while at the same time including the boundaries (the road objects) in these decisions.
 %In addition to the map generalization, 
 %they also made statistics of the number of faces,
 %the area of faces, the number of road faces, the number of road edges,
@@ -310,7 +311,7 @@ the \emph{Zipper}, and the \emph{Eater}.
 Basically, the \emph{winner} area gradually expands over the \emph{loser} area.
 We will use the \emph{Eater} because it works for all kinds of polygons,
 while the other two methods have limitations for some special cases.
-For example, the two other methods do not work for some concave polygons.
+For example, the two other methods do not work for certain concave polygons.
 
 
 
@@ -352,13 +353,20 @@ and included those distances into their cost function of integer linear program.
 \citet{Peng2020AreaAgg} defined the semantic distance based on a tree of classes,
 which guarantees that the distance is a metric.   
 
+\todo[inline]{May be include reference to PhD thesis of John van Smaalen;
+class driven generalization; in fig 22 and the Class adjacency index and the
+object aggregation factor; see sec. 4.5, 4.6 in the PhD thesis:
+J.W.N. van Smaalen, Automated Aggregation of Geographic Objects,
+A New Approach to the Conceptual Generalisation of Geographic Databases,
+Wageningen Universiteit, 18 november 2003
+}
 
 
 
-\subsection{Paralleling generalization in CMG}
+\subsection{Simultaneous generalization operators in CMG}
 
 
-Many methods of CMG naturally simultaneous generalization operators.
+Many methods of CMG naturally apply multiple generalization operators simultaneously.
 In morphing polylines, the points of the polylines are moved simultaneously
 \citep[\eg][]{Noellenburg2008,Li2017Annealing}.
 \citet{Li2017_Building} simultaneously generalized individual buildings.
@@ -413,7 +421,7 @@ we merge by gradually expanding an area over another area
 See the web maps at
 \url{https://congengis.github.io/webmaps/2021/07/merge/}.
 A comparison of the single merging and the simultaneous merging can be found at 
-\url{https://congengis.github.io/webmaps/2021/07/merge/eg-7-comparer-overlay-single-simultaneous.html},
+\url{https://congengis.github.io/webmaps/2021/07/merge/eg-7-comparer-overlay-single-parallel.html},
 where the swiper can be moved to see the differences of the two maps at scale, 
 for example, $1:11{,}832$.}
 This expansion can be realized 
@@ -431,11 +439,8 @@ and the OBJ file can be visualized by software ParaView
 (see \fig\ref{fig:ssc}).
 In \fig\ref{fig:ssc}, the $z$-coordinates are $100$ times of
 the state values in \fig\ref{fig:intro}.
-We did this multiplication so that the contents can be better observed;
-otherwise, the two SSCs will be very short when displayed in ParaView.
-Note that the merging is independent of users' area objects of interest;
-the merging operations happen outside the region of interest 
-are also realized by expanding.
+We performed this multiplication for illustrative purpose only, so that the contents of the SSC in the figures can be better observed.
+Note that the merging operation is applied in a pre-processing step, before the user zooming in and out of the map and is thus independent of users' area objects of interest.
 
 %Our strategy of presenting the static boundary (\ie~the exterior one) 
 %is that we store the polylines and 
@@ -582,7 +587,7 @@ suggested processing the generalization operations simultaneously,
 but no implementation, testing, or assessment of the idea was provided.
 Second, the simultaneity brings smoother zooming.
 Although the SSC allows to deliver a map at any scale,
-only $16$ frames by default will be created to display in one second.
+only $16$ frames by default will be created to display during one second.
 When showing an animation zooming, 
 we set $16$ as the default value of frames per second (FPS).
 This value is adequate to provide the visual continuity
@@ -590,7 +595,7 @@ This value is adequate to provide the visual continuity
 If the merging operations happen sequentially instead of simultaneously,
 it is more likely that
 the gap between two frames is larger than the gap between two states.
-Then there is no animation of smooth merging at all.
+Then there is no animation of smooth merging shown at all.
 For example, if the consecutive frames are 
 \figs\ref{fig:intro}d, \ref{fig:intro}e, and \ref{fig:intro}f,
 then users can only see discrete merging.
@@ -655,7 +660,7 @@ computing the weight values and the class similarities.
 
 \fig\ref{fig:greedy_framework} shows the flowchart of our greedy algorithm.
 The process starts with state~$s=0$ and a detailed map of area objects, $|M_0|$.
-Parallel parameter $r_\mathrm{simul}$ specifies 
+Parameter $r_\mathrm{simul}$ specifies 
 the proportion (\ie~percentage, when multiplied by~$100$) of area objects that
 we expect to merge simultaneously.
 As a value of percentage, 
@@ -720,8 +725,8 @@ we define an event of areas~$a_\mathrm{least}$ and~$a_\mathrm{nbr}$.
 Then, we increase the number of events, $n_\mathrm{event}$, by 1.
 We block the surrounding neighbors of~$a_\mathrm{least}$ and~$a_\mathrm{nbr}$
 (see \fig\ref{fig:blocked_polygons}a).
-Note that the area shares only a vertex 
-with the least important area is not blocked.
+Note that if the area shares only a vertex 
+with the least important area it is not blocked.
 If area~$a_\mathrm{nbr}$ is not free,
 then it must be blocked because of the previously found events.
 In this case, we block $a_\mathrm{least}$ for now
@@ -740,14 +745,14 @@ increase state~$s$ by value~$n_\mathrm{event}$,
 and create map~$M_s$ based on the new areas and the freed areas.
 Then, finding merging events for the next step starts.
 This iteration of finding completes 
-until there is only one area left on the map ($|M_s|=1$).
+when there is only one area left on the map ($|M_s|=1$).
 The merging events will be stored as records in tGAP database tables
 (see \fig\ref{fig:uml_tgap}).
 \figs\ref{fig:intro}k--o show a sequence of four merging steps
 obtained by our greedy algorithm,
 where simultaneous parameter~$r_\mathrm{simul}$ is set to~$0.3$
 (Note that this is an extremely high value, 
-just used to explain the principle in an artificial simple example).
+used here to explain the principle in an artificial simple example).
 
 
 
@@ -789,7 +794,7 @@ the face should have been merged with another area.
 Comparing between the tables of single merging 
 (\figs\ref{fig:intro}d--j)
 and simultaneous merging (\figs\ref{fig:intro}k--o),
-we observed some differences of the values.
+we observe some differences of the values.
 For example, the $s_\mathrm{high}$ values of faces~1 and~2 are changed from~1 to~2
 (see \tabl\ref{tbl:face_tgap}).
 Also, the $s_\mathrm{low}$ value of face~8 is changed from~1 to~2
@@ -884,9 +889,9 @@ at state~$s_\mathrm{high}$.
 In the face table, a row will be added to record the new area, 
 and its $s_\mathrm{low}$ value will be the previous~$s_\mathrm{high}$ value.
 The new area takes the combined place of the pair of areas.
-Take \ref{fig:intro} as an example, 
-area~1 is merged into area~2 (\figs\ref{fig:intro}d), 
-and area~8 is generated to take the combined place (\figs\ref{fig:intro}e).
+Take \fig\ref{fig:intro} as an example, 
+area~1 is merged into area~2 (\fig\ref{fig:intro}d), 
+and area~8 is generated to take the combined place (\fig\ref{fig:intro}e).
 The tilted triangle is the one spans 
 from~$z= 0$ to~$z=100$ (\ie~from state~0 to state~1)
 in \fig\ref{fig:ssc}a.
@@ -955,23 +960,23 @@ Therefore, we compute~$s_\mathrm{merge}$ values
 based on the~$s_\mathrm{high}$ values
 on the fly when building the SSC.
 As an event involves two areas,
-the number of events finishing at state~$s_\mathrm{high}$ can be calculated by
-\begin{equation*}
+the number of events finishing at state~$s_\mathrm{high}$ can be calculated by:
+\begin{equation}
 \label{eq:n_event_state}
 n_\mathrm{event} (s_\mathrm{high}) = 
-\frac{\sum\limits_{s \in S_\mathrm{high}} [s=s_\mathrm{high}]}{2},
-\end{equation*}
+\frac{\sum\limits_{s \in S_\mathrm{high}} [s=s_\mathrm{high}]}{2}
+\end{equation}
 where notation~$S_\mathrm{high}$ denotes the set of values
 recorded in column~$s_\mathrm{high}$ of the face table
 (\eg~\tabl\ref{tbl:face_tgap}b).
 Expression~$[s=s_\mathrm{high}]$ returns~$1$ if the two values are equal 
 and returns~$0$ otherwise.
 As illustrated before, the state at which the simultaneous merging starts 
-can be computed by
-\begin{equation*}
+can be computed by:
+\begin{equation}
 \label{eq:s_merge_state}
-s_\mathrm{merge} (s_\mathrm{high}) = s_\mathrm{high} - n_\mathrm{event} (s_\mathrm{high}).
-\end{equation*}
+s_\mathrm{merge} (s_\mathrm{high}) = s_\mathrm{high} - n_\mathrm{event} (s_\mathrm{high})
+\end{equation}
 
 
 
@@ -1053,7 +1058,7 @@ In order to keep the density, we require
 \begin{equation}
 \label{eq:equal_density}
 \frac{N_\mathrm{b}}{A_\mathrm{real} \big/ S^2_\mathrm{b}} =
-\frac{N_\mathrm{b}-E_\mathrm{t}}{A_\mathrm{real} \big/ S^2_\mathrm{t}},
+\frac{N_\mathrm{b}-E_\mathrm{t}}{A_\mathrm{real} \big/ S^2_\mathrm{t}}
 \end{equation}
 where parameter~$N_\mathrm{b} = |M_0|$ 
 is the number of areas on the base map,
@@ -1061,10 +1066,10 @@ parameter~$S_\mathrm{b}$ is the scale denominator of the base map,
 and variable~$E_\mathrm{t}$ is the total number of events 
 happening from the base map to the map at scale~$1:S_\mathrm{t}$
 (in this case, an event is that an area is merged into another one).
-\eq\ref{eq:equal_density} yields
+\eq\ref{eq:equal_density} yields:
 \begin{equation}
 \label{eq:E_t}
-E_\mathrm{t} = N_\mathrm{b} \left(1-\frac{S^2_\mathrm{b}}{S^2_\mathrm{t}}\right),
+E_\mathrm{t} = N_\mathrm{b} \left(1-\frac{S^2_\mathrm{b}}{S^2_\mathrm{t}}\right)
 \end{equation}
 In our example regarding to list of valid states~$\mathrm{S_\mathrm{valid}}$,
 if event number~$E_\mathrm{t} \le 0$, the base map should be presented;
@@ -1077,7 +1082,7 @@ The scale denominator corresponding to event number~$E_\mathrm{t,snap}$
 can be computed by 
 \begin{equation}
 \label{eq:S_t_snap}
-S_\mathrm{t,snap} = S_\mathrm{b} \sqrt{\frac{N_\mathrm{b}}{N_\mathrm{b}-E_\mathrm{t,snap}}}.
+S_\mathrm{t,snap} = S_\mathrm{b} \sqrt{\frac{N_\mathrm{b}}{N_\mathrm{b}-E_\mathrm{t,snap}}}
 \end{equation}
 where this equation is an inverse function of \eq\ref{eq:E_t}.
 At the end of the zooming action, 
@@ -1138,7 +1143,7 @@ where each step consists of at least one event.
 Then, we have 
 \begin{equation}
 \label{eq:t_compare}
-t_\mathrm{simultaneous} = t_\mathrm{single}  \frac{N_\mathrm{event}}{n_\mathrm{step}}.
+t_\mathrm{simultaneous} = t_\mathrm{single}  \frac{N_\mathrm{event}}{n_\mathrm{step}}
 \end{equation}
 As~$N_\mathrm{event}$ is larger than or equal to~$n_\mathrm{step}$,
 we have $t_\mathrm{simultaneous} \ge t_\mathrm{single}$.
@@ -1156,13 +1161,16 @@ in \appx\ref{appx:animation_duration_event}.
 \caption{Our panel of settings. 
 Among others, one can set how much to zoom when scrolling the mouse wheel 
 and set the zooming duration. 
+}
+\label{fig:interaction_settings}
+
+\end{figure*}
+\todo[inline]{\emph{Move this note to online interface:}
 Note that if your computer does not have a discrete graphics card, 
 then you may observe that the eating is flickering.
 In order to avoid the flickering, 
-one can set the opacity to 1 and uncheck the box for color adapting.}
-\label{fig:interaction_settings}
-\end{figure*}
-
+one can set the opacity to 1 and uncheck the box for color adapting.
+}
 
 
 \section{Case study}
@@ -1201,7 +1209,7 @@ by slicing the SSC.
 
 %
 \figs\ref{fig:data} shows the topographical map of this case study.
-The class codes and the rendering formulas are provided by Geonovum.\footnote{%
+The class codes and the rendering formulas are provided by the Dutch Kadaster.\footnote{%
 See the details at
 \url{http://register.geostandaarden.nl/visualisatie/top10nl/1.2.0/BRT_TOP10NL_1.2_beschrijving_visualisatie.xlsx},
 accessed: Jan 15, 2020.}
@@ -1212,7 +1220,7 @@ The maximum value of event number~$E_\mathrm{snap}$ is~$13{,}237$
 as there are in total~$13{,}238$ areas.
 When we zoom out far enough 
 so that~$E_\mathrm{snap}$ reaches its maximum value,
-the scale denominator will arrive at~$1{,}150{,}565.1$
+the scale denominator will arrive at~$1{,}150{,}565$
 according to \eq\ref{eq:S_t_snap}.
 At that moment, all the areas are merged into one single area.
 %(see \figs\ref{fig:data}b).
@@ -1221,7 +1229,7 @@ We tried three cases: 0.1\%, 1\%, and 10\%.
 That is, simultaneous parameter~$r_\mathrm{simul}=0.001, 0.01, \text{and~} 0.1$ 
 (see \sect\ref{sec:greedy_algo}), 
 which are independent of the size of the map dataset.
-The three versions of map can be browsed online.\footnote{%
+The three versions of the map can be browsed online.\footnote{%
 All of our web maps can be found at
 \url{https://congengis.github.io/webmaps/2020/05/merge/}.}
 \fig\ref{fig:web_map} shows two examples of our web map when 
@@ -1448,7 +1456,7 @@ Then, the simultaneous events are integrated into
 the tGAP and the SSC to nicely visualize the merging animations.
 %This paper also proposed a strategy 
 %to concisely store the number of merging events for all the steps.
-To guarantee that the merging animations always complete for zooming, 
+To guarantee that the merging animations always are completely shown while zooming, 
 we managed to snap zooming operations to valid states.
 This paper also presents a recipe 
 to define the animation duration of an event.
@@ -1467,7 +1475,7 @@ when zooming on a map based on simultaneous-event operations.
 Many topics related to this research need to be investigated further.
 Our case study with $13{,}238$ area objects 
 demonstrated the efficiency of our map.
-In our case study, all the data of the SSC is store in a single file
+In our case study, all the data of the SSC is stored in a single file
 because the tested map is not very big.
 The map will display only after the whole file is loaded.
 For a topographic map with much more objects,
@@ -1565,7 +1573,7 @@ When we slice this SSC to animate a zooming action,
 the boundaries of the areas are morphed 
 (moved smoothly and simultaneously)
 between a detailed representation and a coarse representation.
-We can imagine that it is challenging to build the tilted walls.
+%We can imagine that it is challenging to build the tilted walls.
 Furthermore, we would like to 
 simplify point symbols and text labels in a smooth way.
 For this purpose, we may need to integrate the ideas of
