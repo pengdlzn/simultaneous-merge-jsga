@@ -27,7 +27,8 @@
  \journalname{Journal of Geovisualization and Spatial Analysis}
 %
 
-\usepackage[disable]{todonotes}
+%\usepackage[disable]{todonotes}
+\usepackage[]{todonotes}
 
 \begin{document}
 
@@ -164,7 +165,7 @@ to generalize simultaneously,
 which is the first time that the simultaneity 
 is explicitly proposed.
 Because of the simultaneity, 
-we propose to snap to the scales with completed generalization operations
+we propose to snap to the scales with completed generalization operations,
 and we discuss the animation time gained for each generalization operation.
 
 
@@ -181,11 +182,6 @@ and present our future work.
 \label{sec:realted_work}
 
 %\subsection{Generalization of area objects (maybe)}
-
-\todo[inline]{Would be nice to include some illustrations from related work,
-may be best 1 or 2 illustrations from our own earlier work. 
-add eater and hierarchies of classes.
-}
 
 
 \subsection{Aggregation of area objects}
@@ -205,7 +201,7 @@ where they introduced operators
 \emph{append merge}, \emph{direct merge}, and \emph{snap merge}
 for rectangular objects, as well as \emph{adopt merge} for natural objects. 
 \citet{Ai2007Aggregation} progressively aggregated building clusters,
-where they found building clusters based on Delaunay triangulation.
+where they found the building clusters based on Delaunay triangulation.
 
 
 %\citet{He2018Amalgamation}
@@ -215,7 +211,7 @@ where they found building clusters based on Delaunay triangulation.
 %\citet{Gedicke2021Aggregating}
 
 \subsection{Merging of area objects}
-Much research has been devoted to the merging of area objects.
+%Much research has been devoted to the merging of area objects.
 \citet{Cheng2006} proposed three choices of 
 selecting neighboring areas to merge, i.e.,
 the neighbor has the largest size, 
@@ -247,22 +243,17 @@ by filling the gap identified by the constrained Delaunay triangulation.
 \citet{Peng2020AreaAgg} tried to 
 find an optimal sequence to merge area objects 
 based on the \Astar algorithm or an integer linear program.
-A comparison to a greedy algorithm showed that 
-the \Astar algorithm improves the quality of the merging sequences
-in the sense of the class changes and the area compactnesses.
-\citet{Peng2020AreaAgg} tried to 
-find an optimal sequence to merge area objects 
-based on the \Astar algorithm or an integer linear program.
-A comparison to a greedy algorithm showed that 
-the \Astar algorithm improves the quality of the merging sequences
-in the sense of the class changes and the area compactnesses.
+A comparison including a greedy algorithm showed that 
+the \Astar algorithm outperforms the two other methods 
+in the aspects of minimizing the class changes 
+and maximizing the area compactnesses.
 \citet{Suba2016Road} continuously generalized a planar map of road network.
-In each step, they process the least important face.
-Taking into account the local condition of the face
+In each step, they process the least important area object.
+Taking into account the local condition of the area object
 (\eg~no compatible neighbor at the same side of the road),
-they may take different decisions for the face: 
-put it back with a higher importance, collapse it, 
-or merge it into an adjacent face, 
+they may take different decisions for the area object: 
+Putting it back with a higher importance, collapsing it, 
+or merging it into an adjacent face, 
 while at the same time including the boundaries (the road objects) in these decisions.
 %In addition to the map generalization, 
 %they also made statistics of the number of faces,
@@ -276,7 +267,7 @@ while at the same time including the boundaries (the road objects) in these deci
 \Citet{vanOosterom2014Support} provided real smooth changes of zooming.
 they developed the concept of the space-scale cube (SSC).
 The bottom of the SSC is a detailed topographic map,
-and all the area objects extrude along the $z$-axis.
+then all the area objects extrude along the $z$-axis.
 In the SSC, an area on the map becomes a polyhedron, and
 the common boundary of two areas is a vertical wall.
 Whenever a generalization operation happens, 
@@ -288,7 +279,7 @@ That is to say, the scale becomes the third dimension of the map in the SSC
 (\eg~\fig\ref{fig:ssc}).
 Furthermore, they represented the smooth tGAP in the SSC.
 A typical example of the smooth generalization operation is that 
-an area merges with another one by gradually expanding over it.
+an area merges with another one by gradually expanding over the latter.
 In the SSC of the smooth tGAP, 
 the wall starts to tilt when the expansion begins.
 Based on the SSC, \citet{Meijers2020Web} explained the principles of 
@@ -299,7 +290,7 @@ so that they were able to send only the chunks relevant
 to users' interested place.
 They showed how to efficiently slice the SSC 
 to output a web map at a given scale 
-using the GPU at the client side using WebGL in the browser.
+using the GPU at the client side called by WebGL in the browser.
 In addition to slicing the SSC with a horizontal plane,
 they could also slice the SSC with a curly surface 
 to have a locally more detailed map
@@ -312,6 +303,20 @@ Basically, the \emph{winner} area gradually expands over the \emph{loser} area.
 We will use the \emph{Eater} because it works for all kinds of polygons,
 while the other two methods have limitations for some special cases.
 For example, the two other methods do not work for certain concave polygons.
+The principle of the Eater is shown in \fig\ref{fig:eater},
+where the interior of the loser is contructed as a triangulation 
+(see \fig\ref{fig:eater}a),
+and the eating process is realized by moving the boundary
+through the triangles (see \fig\ref{fig:eater}b).
+
+\begin{figure}[tb]
+\centering
+\includegraphics[page=1,width=\linewidth]{introduction}
+\caption{The principle of the Eater;
+taken from \citet{Suba2014Merge}.}
+\label{fig:eater}
+\end{figure}
+
 
 
 
@@ -336,7 +341,7 @@ For example, the two other methods do not work for certain concave polygons.
 \subsection{Merging considering semantic properties}
 
 As mentioned in \sect\ref{sec:introduction}, 
-each of the area objects has its \emph{semantic property} (\ie class).
+each of the area objects has its \emph{semantic property} (\ie~class).
 When we merge an area into another area, 
 the semantic property of the former is changed to that of the latter.
 It is important not to cause too much change for two reasons.
@@ -349,17 +354,29 @@ When choosing the neighbor, the algorithm considers
 the compatibility between the least important area and the neighbor,
 where the compatibility can be defined based on the semantic property.
 \citet{HaunertWolff2010AreaAgg} defined distances between semantic properties 
-and included those distances into their cost function of integer linear program.
+and included those distances into the cost function of their integer linear program.
 \citet{Peng2020AreaAgg} defined the semantic distance based on a tree of classes,
-which guarantees that the distance is a metric.   
+which guarantees that the distance is a metric (see \fig\ref{fig:class_dis}).   
 
-\todo[inline]{May be include reference to PhD thesis of John van Smaalen;
-class driven generalization; in fig 22 and the Class adjacency index and the
-object aggregation factor; see sec. 4.5, 4.6 in the PhD thesis:
-J.W.N. van Smaalen, Automated Aggregation of Geographic Objects,
-A New Approach to the Conceptual Generalisation of Geographic Databases,
-Wageningen Universiteit, 18 november 2003
-}
+
+\begin{figure*}[tb]
+\centering
+\includegraphics[page=2]{introduction}
+\caption{A way of defining the distance of classes. 
+Taken from \citet{Peng2020AreaAgg}.}
+\label{fig:class_dis}
+\end{figure*}
+
+\citet[][\sect4.4.3]{vanSmaalen2003} mentioned the class-driven generalization, 
+where if the two classes of two area objects are under the same super class,
+then the two area objects should be merged, 
+and the new area object uses the super class.
+\Citet[][\sect4.5]{vanSmaalen2003} suggested that
+the merging operation should also consider classes that co-occur spatially.
+He proposed the \emph{class adjacency index} to measure 
+if two classes are often adjacent;
+if so, the two objects, with the two classes, should be aggregated,
+and a composite class should be used.
 
 
 
@@ -419,9 +436,9 @@ so that map users can easily keep track of their interested areas,
 we merge by gradually expanding an area over another area
 (see \fig\ref{fig:intro}q).\footnote{%
 See the web maps at
-\url{https://congengis.github.io/webmaps/2021/07/merge/}.
+\url{https://congengis.github.io/webmaps/2021/08/merge/}.
 A comparison of the single merging and the simultaneous merging can be found at 
-\url{https://congengis.github.io/webmaps/2021/07/merge/eg-7-comparer-overlay-single-parallel.html},
+\url{https://congengis.github.io/webmaps/2021/08/merge/eg-7-comparer-overlay-single-simultaneous.html},
 where the swiper can be moved to see the differences of the two maps at scale, 
 for example, $1:11{,}832$.}
 This expansion can be realized 
@@ -455,7 +472,7 @@ Note that the merging operation is applied in a pre-processing step, before the 
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=1,scale=0.99]{introduction}
+\includegraphics[page=1,scale=0.99]{methodology}
 \caption{A comparison of different scale-transition strategies.
 Each arrow inside the subfigures indicates a merging operation.
 The arrow in the right-hand side indicates the states of zooming out.
@@ -479,13 +496,13 @@ adapt to the colors of the larger areas during merging.
 \centering
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
-\includegraphics[page=4,width=0.95\linewidth]{methodology}
+\includegraphics[page=2,width=0.95\linewidth]{methodology}
 \caption{The SSC of the single merging of \figs\ref{fig:intro}d--j.}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
-\includegraphics[page=5,width=0.95\linewidth]{methodology}
+\includegraphics[page=3,width=0.95\linewidth]{methodology}
 \caption{The SSC of the simultaneous merging of \figs\ref{fig:intro}k--o}
 \end{subfigure}
 \caption{
@@ -687,7 +704,7 @@ to represent the number of events that actually happened within the step.
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=1]{methodology}
+\includegraphics[page=4]{methodology}
 \caption{The flowchart of our greedy algorithm.
 }
 \label{fig:greedy_framework}
@@ -696,7 +713,7 @@ to represent the number of events that actually happened within the step.
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=2]{methodology}
+\includegraphics[page=5]{methodology}
 \caption{The process of finding simultaneous merging events for a step, 
     where simultaneous parameter $r_\mathrm{simul} = 0.3$.
     (a) From all the free areas,
@@ -726,7 +743,7 @@ Then, we increase the number of events, $n_\mathrm{event}$, by 1.
 We block the surrounding neighbors of~$a_\mathrm{least}$ and~$a_\mathrm{nbr}$
 (see \fig\ref{fig:blocked_polygons}a).
 Note that if the area shares only a vertex 
-with the least important area it is not blocked.
+with the least important area, it is not blocked.
 If area~$a_\mathrm{nbr}$ is not free,
 then it must be blocked because of the previously found events.
 In this case, we block $a_\mathrm{least}$ for now
@@ -758,8 +775,9 @@ used here to explain the principle in an artificial simple example).
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=3]{methodology}
-\caption{The UML diagram of the classes stored in tGAP database tables.
+\includegraphics[page=6]{methodology}
+\caption{The Unified Modeling Language (UML) diagram of the classes 
+stored in tGAP database tables.
 This diagram is a slightly improved version of \citet[\p159]{Meijers2011Thesis}.
 In the face table, property \emph{pip\_geometry} 
 stores a point (usually the center) in the face (polygon).
@@ -1157,28 +1175,21 @@ in \appx\ref{appx:animation_duration_event}.
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[page=6,scale=0.9]{methodology}
+\includegraphics[page=7,scale=0.9]{methodology}
 \caption{Our panel of settings. 
 Among others, one can set how much to zoom when scrolling the mouse wheel 
 and set the zooming duration. 
 }
 \label{fig:interaction_settings}
-
 \end{figure*}
-\todo[inline]{\emph{Move this note to online interface:}
-Note that if your computer does not have a discrete graphics card, 
-then you may observe that the eating is flickering.
-In order to avoid the flickering, 
-one can set the opacity to 1 and uncheck the box for color adapting.
-}
 
 
 \section{Case study}
 \label{sec:case_study}
 
 
-\textbf{How much data to be loaded?}
-\textbf{How much time for loading data?}
+%\textbf{How much data to be loaded?}
+%\textbf{How much time for loading data?}
 
 
 We have stored the result of the tGAP 
@@ -1231,7 +1242,7 @@ That is, simultaneous parameter~$r_\mathrm{simul}=0.001, 0.01, \text{and~} 0.1$
 which are independent of the size of the map dataset.
 The three versions of the map can be browsed online.\footnote{%
 All of our web maps can be found at
-\url{https://congengis.github.io/webmaps/2020/05/merge/}.}
+\url{https://congengis.github.io/webmaps/2021/08/merge/}.}
 \fig\ref{fig:web_map} shows two examples of our web map when 
 simultaneous parameter~$r_\mathrm{simul}=0.01$.
 
@@ -1389,7 +1400,7 @@ When zooming on our web maps with different simultaneous parameters,
 we observed that the impressions of the maps 
 based on single merging\footnote{%
 See the web map at
-\url{https://congengis.github.io/webmaps/2020/05/merge/single-merging/}.} 
+\url{https://congengis.github.io/webmaps/2021/08/merge/limburg-single-merging}.} 
 and based on simultaneous merging with parameter~$r_\mathrm{simul}= 0.001$ 
 are almost the same.
 The reason is that the smooth merging happens too fast,
@@ -1401,7 +1412,7 @@ and simultaneous merging,
 we put two maps together (see \fig\ref{fig:comparison}),
 where the simultaneous parameter is~$0.1$.\footnote{%
 See the map of comparison at
-\url{https://congengis.github.io/webmaps/2020/05/merge/0.1/comparer.html}.}  
+\url{https://congengis.github.io/webmaps/2021/08/merge/limburg-comparer-overlay-single-vs-0.1.html}.}  
 
 
 \begin{figure}[tb]
