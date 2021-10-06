@@ -1,0 +1,5 @@
+line 28, we propose to use a greedy algorithm that merges a pair of areas
+
+swap the order in 
+
+we apply a greedy algorithm bla simultaneously, that's a contribution, in contrast of merge sequntially
