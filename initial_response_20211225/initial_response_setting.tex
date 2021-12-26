@@ -6,7 +6,8 @@
 \usepackage{xspace}
 
 \usepackage[defaultlines=4,all]{nowidow}%forbid widow or orphan
-
+% https://tex.stackexchange.com/questions/229638/package-biblatex-warning-babel-polyglossia-detected-but-csquotes-missing
+\usepackage{csquotes}
 
 % Hack to try to make acmart work with biblatex: 
 %https://tex.stackexchange.com/questions/37076/is-it-possible-to-load-biblatex-with-a-class-that-has-already-loaded-natbib
@@ -30,6 +31,7 @@ backrefstyle=three, %Compress three or more consecutive pages
 maxbibnames=9, %the author names appearing in bibliography
 maxcitenames=2, %the author names appearing in text
 giveninits=true,
+uniquename=init, % see tex.stackexchange.com/questions/505654/
 %terseinits=true,%remove periods after initials of first names
 isbn=false,
 %doi=false,url=false,
@@ -43,8 +45,9 @@ language=american,
 abbreviate=true, dateabbrev=true,
 ]{biblatex}
 
-\addbibresource{../Reference/BibReference.bib}
-%\addbibresource{BibReference.bib}
+%\addbibresource{../Reference/BibReference.bib}
+\addbibresource{BibReference.bib}
+%\addbibresource{Reference/BibReference.bib}
 \DeclareNameAlias{author}{family-given}%lastname before firstname
 
 
