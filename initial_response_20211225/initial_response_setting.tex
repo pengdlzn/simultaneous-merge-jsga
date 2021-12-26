@@ -13,8 +13,8 @@
 %https://tex.stackexchange.com/questions/37076/is-it-possible-to-load-biblatex-with-a-class-that-has-already-loaded-natbib
 %\let\citename\relax
 \usepackage[
-%backend=bibtex,
-backend=biber,
+backend=bibtex, % works on Overleaf
+% backend=biber, 
 %style=numeric-comp, %number the references, compact
 style=authoryear, %no indices before names; year after names
 %style=alphabetic, %style for my thesis
@@ -45,9 +45,9 @@ language=american,
 abbreviate=true, dateabbrev=true,
 ]{biblatex}
 
-%\addbibresource{../Reference/BibReference.bib}
-\addbibresource{BibReference.bib}
-%\addbibresource{Reference/BibReference.bib}
+% \addbibresource{../Reference/BibReference.bib} % works on local computer
+\addbibresource{Reference/BibReference.bib} % works on Overleaf
+% \addbibresource{BibReference.bib} % The copy in this folder
 \DeclareNameAlias{author}{family-given}%lastname before firstname
 
 
