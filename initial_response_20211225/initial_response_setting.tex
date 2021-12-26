@@ -1,0 +1,128 @@
+% 1. Load and set up proper language packages
+%\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{xspace}
+
+\usepackage[defaultlines=4,all]{nowidow}%forbid widow or orphan
+
+
+% Hack to try to make acmart work with biblatex: 
+%https://tex.stackexchange.com/questions/37076/is-it-possible-to-load-biblatex-with-a-class-that-has-already-loaded-natbib
+%\let\citename\relax
+\usepackage[
+%backend=bibtex,
+backend=biber,
+%style=numeric-comp, %number the references, compact
+style=authoryear, %no indices before names; year after names
+%style=alphabetic, %style for my thesis
+%
+sorting=nyvt, %sort in bibliography by name, year, volume, title
+%sortcites, %sort in content by numbering
+hyperref=true,%transform citations and back references into 
+%clickable hyperlinks
+backref=true, %to print back references in the bibliography
+backrefstyle=three, %Compress three or more consecutive pages 
+%to a range
+%,
+%citestyle=authoryear,
+maxbibnames=9, %the author names appearing in bibliography
+maxcitenames=2, %the author names appearing in text
+giveninits=true,
+%terseinits=true,%remove periods after initials of first names
+isbn=false,
+%doi=false,url=false,
+eprint=false,
+%dashed=false,
+%useprefix=false,%sort bibliography use prefix like "van"
+date=year, %so that the month will not shown with the year
+natbib=true,
+%style=ACM-Reference-Format,
+language=american,
+abbreviate=true, dateabbrev=true,
+]{biblatex}
+
+\addbibresource{../Reference/BibReference.bib}
+%\addbibresource{BibReference.bib}
+\DeclareNameAlias{author}{family-given}%lastname before firstname
+
+
+%if a reference has doi, then we print only doi in bibliography;
+%otherwise, we print only url
+%we don't use eprint
+%we must deactivate eprint by using "eprint=false"
+\renewbibmacro*{doi+eprint+url}{% 
+	\iftoggle{bbx:url} 
+	{\iffieldundef{doi}{\usebibmacro{url+urldate}}{}} 
+	{}% 
+	%	\newunit\newblock 
+	%	\iftoggle{bbx:eprint} 
+	%	{\usebibmacro{eprint}} 
+	%	{}% 
+	\newunit\newblock 
+	\iftoggle{bbx:doi} 
+	{\printfield{doi}} 
+	{}}	
+
+
+\newcommand{\Astar}{A$^{\!\star}$\xspace}
+
+% 2. Complete the paper data
+\newcommand{\myAuthors}{
+{Dongliang Peng, 
+Martijn Meijers, 
+Peter van Oosterom} %\\ {} other authors
+}
+
+
+\newcommand{\myAuthorsShort}{Dongliang Peng et. al.}
+\newcommand{\myEmail}{}
+\newcommand{\myTitle}
+{Initial responses to the reviewers of paper 
+``Generalizing simultaneously to support smooth zooming:
+Case study of merging area objects''}
+\newcommand{\myShortTitle}{Finding Optimal Sequences for Area Aggregation}
+\newcommand{\myJournal}{International Journal of Geographical Information Science}
+\newcommand{\myDept}{
+    {GIS Technology, Delft University of Technology, The Netherlands}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\usepackage[linktoc=all]{hyperref}
+\usepackage[linktoc=all,bookmarks,
+bookmarksopen=true,bookmarksnumbered=true]{hyperref}
+
+\hypersetup{
+	pdfauthor = {\myAuthorsShort},
+	pdftitle = {\myTitle},
+	pdfsubject = {\myJournal\xspace},
+	colorlinks = true,
+	linkcolor=black!70!green,          % color of internal links
+	citecolor=black!70!green,        % color of links to bibliography
+	filecolor=magenta,      % color of file links
+	urlcolor=black!70!green           % color of external links
+}
+
+
+\newcommand{\e}[1]{\times 10^{#1}}
+\newcommand{\fig}{Figure~}
+\newcommand{\eq}{Equation~}
+\newcommand{\fo}{Formula~}
+\newcommand{\sect}{Section~}
+\newcommand{\tab}{Table~}
+\newcommand{\chap}{Chapter~}
+\newcommand{\figs}{Figures~}
+\newcommand{\eqs}{Equations~}
+\newcommand{\fos}{Formulas~}
+\newcommand{\sects}{Sections~}
+\newcommand{\tabs}{Tables~}
+\newcommand{\chaps}{Chapters~}
+\newcommand{\p}{p.~}
+\newcommand{\pp}{pp.~}
+\newcommand{\eg}{e.g.,}
+\newcommand{\ie}{i.e.,}
+
+\renewcommand{\labelitemi}{\textendash}
+
