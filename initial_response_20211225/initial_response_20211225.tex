@@ -66,34 +66,84 @@
 \end{abstract}
 
 \section{Reviewer 1}
-\setcounter{comments}{-1} %the counter will start from 0
+% \setcounter{comments}{-1} %the counter will start from 0
 
 \phantomsection % see https://latex.org/forum/viewtopic.php?t=22814
 \rcommentnoskip{
-This paper proposes a parallel merging method based on a greedy algorithm and a space-scale cube
-(SSC) to generalize a digital map continuously and smoothly. According to cases and comparisons
-accessed at webmaps\footnote{%
-The case study at
-\url{https://congengis.github.io/webmaps/2020/05/merge/example-discrete-merging/}.}, the parallel merging method can provide users with gradual impression.
-Although the proposed method seems interesting and valid, some points should be carefully
-considered to publish this paper.
+The main idea of this paper (performing simultaneous smooth zooming in the context of SSC) is interesting, and is as far as I know a novel topic. Generally, the paper is good, and therefore my comments are on smaller details.
 }
+\textbf{Response.} Thanks for the positive comments.
 
-\citep[\eg][]{Noellenburg2008,Li2017Annealing}
-% \cite{Li2004}
 
-%\textbf{Response.} Thanks for the summary.
-%
-%
-%\rcomment{
-%1. The content of Abstract (Line 1--32) cannot reflect the highlights of this paper, 
-%which is focused too much on the implement of the proposed method.
-%}
-%
-%\textbf{Response.} We have improved our abstract. 
-%The new abstract focuses more on the benefits and novelty of our method.
-%
-%
+\rcomment{
+When starting reading the paper I missed a statement by the author in which way they wanted to perform the simultaneous generalization. Since working with e.g. SSC prohibit connected objects to be treated a choice has to be made of how to select the object. But the author do not really describe their ideal situation. This topic is, however, treated in the later part of the paper (page 11 row 33-44 (right)page 13 row 37-53) where they discuss the shortcoming of the proposed greedy algorithms if a too large value of the simultaneous parameter is used (which is a quite obvious effect). It would be good if the author could bring up this topic early in the paper (and later refer back to their vision when they know the result).
+}
+\textbf{Response.} 
+We can start discussing our simultaneous generalization 
+in the section of introduction.
+What is our ideal situation? 
+Is it that the small areas distribute evenly on the map 
+so that few objects will be blocked?
+
+\rcomment{
+The weakest part of the paper is the description of the greedy algorithm (I might have made mistake while reading this part, but my impression is that this description really needs improvements).
+}
+\textbf{Response.} 
+Thanks for the feedback!
+We will improve our paper according to your comments 
+(see our responses below).
+
+\rcomment{
+While reading it I got a bit uncertain of whether the greedy algorithm is in real time or if it is used in a preprocess. I might have missed something. Make sure this is clear.
+}
+\textbf{Response.} 
+We will discuss this topic early in section ``A greedy algorithm''.
+
+\rcomment{
+State early in the description that 
+the greedy algorithm aims at defining which events 
+that should be triggered at a certain step. 
+This becomes clear in the sentence starting with 
+``The merging'' on page 7 row 59, 
+but the reader needs this information earlier.
+}
+\textbf{Response.} 
+We will discuss this topic early in section ``A greedy algorithm''.
+
+
+\rcomment{
+Page 6 row 43 right. Here you use $M_0$, while in start of Figure 6 $M_s$ is used.
+}
+\textbf{Response.} 
+There is no $M_0$ in Page 6 row 43.
+
+\rcomment{
+Page 6, row 42 right. Has the termed "blocked" been described earlier?
+}
+\textbf{Response.}
+We used this term before, but we didn't describe it.
+We will do so.
+
+\rcomment{
+Equation 1: You have to explain the symbols used 
+refer to the ceiling function in the where-sentence after the equation.
+}
+\textbf{Response.}
+We will do so.
+
+\rcomment{
+Page 6 row 47 right. Is ``free area'' defined?
+}
+\textbf{Response.}
+No. We will explain blocked areas and free areas earlier.
+
+\rcomment{
+Figure 5. In the caption you write that this I a process of "merging events for a step". In the bottom of figure 5 it is stated "all the steps".
+}
+\textbf{Response.}
+No. We will explain blocked areas and free areas earlier.
+
+
 %\rcomment{
 %2. There have been many continuous map generalization algorithms for different features to provide
 %scale transition. And authors mainly introduce algorithms about area object. Except for the merging
