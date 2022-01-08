@@ -66,24 +66,26 @@
 \end{abstract}
 
 \section{Reviewer 1}
-% \setcounter{comments}{-1} %the counter will start from 0
+\setcounter{comments}{-1} %the counter will start from 0
 
 \phantomsection % see https://latex.org/forum/viewtopic.php?t=22814
 \rcommentnoskip{
 The main idea of this paper (performing simultaneous smooth zooming in the context of SSC) is interesting, and is as far as I know a novel topic. Generally, the paper is good, and therefore my comments are on smaller details.
 }
-\textbf{Response.} Thanks for the positive comments.
+\textbf{Response.} Thanks for the positive comment.
 
 
 \rcomment{
-When starting reading the paper I missed a statement by the author in which way they wanted to perform the simultaneous generalization. Since working with e.g. SSC prohibit connected objects to be treated a choice has to be made of how to select the object. But the author do not really describe their ideal situation. This topic is, however, treated in the later part of the paper (page 11 row 33-44 (right)page 13 row 37-53) where they discuss the shortcoming of the proposed greedy algorithms if a too large value of the simultaneous parameter is used (which is a quite obvious effect). It would be good if the author could bring up this topic early in the paper (and later refer back to their vision when they know the result).
+When starting reading the paper I missed a statement by the author in which way they wanted to perform the simultaneous generalization. Since working with e.g. SSC prohibit connected objects to be treated a choice has to be made of how to select the object. But the author do not really describe their ideal situation. This topic is, however, treated in the later part of the paper (page 11 row 33-44 (right) page 13 row 37-53) where they discuss the shortcoming of the proposed greedy algorithms if a too large value of the simultaneous parameter is used (which is a quite obvious effect). It would be good if the author could bring up this topic early in the paper (and later refer back to their vision when they know the result).
 }
 \textbf{Response.} 
 We can start discussing our simultaneous generalization 
 in the section of introduction.
-What is our ideal situation? 
+\noticecomment{What is our ideal situation? 
 Is it that the small areas distribute evenly on the map 
-so that few objects will be blocked?
+so that few objects will be blocked?}
+
+
 
 \rcomment{
 The weakest part of the paper is the description of the greedy algorithm (I might have made mistake while reading this part, but my impression is that this description really needs improvements).
@@ -97,6 +99,7 @@ We will improve our paper according to your comments
 While reading it I got a bit uncertain of whether the greedy algorithm is in real time or if it is used in a preprocess. I might have missed something. Make sure this is clear.
 }
 \textbf{Response.} 
+The greedy algorithm is used in a preprocess.
 We will discuss this topic early in section ``A greedy algorithm''.
 
 \rcomment{
@@ -115,7 +118,8 @@ We will discuss this topic early in section ``A greedy algorithm''.
 Page 6 row 43 right. Here you use $M_0$, while in start of Figure 6 $M_s$ is used.
 }
 \textbf{Response.} 
-There is no $M_0$ in Page 6 row 43.
+Do you mean page 6 row 25 right?
+$M_0$ is a case of $M_s$, which should be fine.
 
 \rcomment{
 Page 6, row 42 right. Has the termed "blocked" been described earlier?
@@ -135,388 +139,223 @@ We will do so.
 Page 6 row 47 right. Is ``free area'' defined?
 }
 \textbf{Response.}
-No. We will explain blocked areas and free areas earlier.
+No, we will explain blocked areas and free areas earlier.
 
 \rcomment{
-Figure 5. In the caption you write that this I a process of "merging events for a step". In the bottom of figure 5 it is stated "all the steps".
+Figure 5. In the caption you write that this is a process of 
+``merging events for a step''. 
+In the bottom of figure 5 it is stated "all the steps".
 }
 \textbf{Response.}
-No. We will explain blocked areas and free areas earlier.
+``merging events for a step'' is in the caption of Figure 6,
+while ``all the steps'' is in Figure 5.
 
 
-%\rcomment{
-%2. There have been many continuous map generalization algorithms for different features to provide
-%scale transition. And authors mainly introduce algorithms about area object. Except for the merging
-%operation to generalize area objects, if there are others existing parallel methods to generalize
-%them? (Line 6--29)
-%}
-%
-%\textbf{Response.} We have added the following paragraph.
-%
-%Many methods of CMG naturally parallel generalization operators.
-%In morphing polylines, the points of the polylines are moved parallelly
-%\citep[\eg][]{Noellenburg2008,Li2017Annealing}.
-%\citet{Li2017_Building} parallelly generalized individual buildings.
-%In those methods, the polylines and the buildings 
-%were generalized parallelly 
-%because they were handled independently.
-%\citet{Peng2017Building,Touya2017Progressive}
-%generalized building to built-up areas.
-%However, there is no simple relationship 
-%between their intermediate-scale maps and their source maps.
-%Therefore, all the intermediate-scale maps of buildings have to be
-%sent from the server to the clients,
-%which is network intensive.
-%
-%
-%\rcomment{
-%3. The authors introduce researches studied by \textcite{Suba2016Road}
-%and \textcite{Huang2017Matrix}, however, 
-%the differences of these methods compared with 
-%the method of \textcite{vanOosterom2014Support} 
-%which is used in this paper are not summarized.
-%}
-%
-%\textbf{Response.} 
-%To emphasize the difference between 
-%\textcite{Suba2016Road} and \textcite{vanOosterom2014Support},
-%we added statement 
-%``while \citet{Suba2016Road} approached CMG 
-%with small sudden changes,
-%\citet{vanOosterom2014Support} provided real smooth changes.''
-%
-%The research of \textcite{Huang2017Matrix} 
-%is about continuous map generalization of river networks,
-%which is not directly related to our research of area objects.
-%Therefore, we have removed the details of \textcite{Huang2017Matrix}
-%and moved the reference into the introduction.
-%
-%
-%\rcomment{
-%4. In Figure 2 and Section 2--3, the authors introduce the topological Generalized Area Partitioning
-%(tGAP) tree and space-scale cube (SSC), which are very important for the proposed method.
-%However, it seems that the SSC built for parallel merging only changes some calculation equation
-%compared with the SSC for single merging, which is not enough to highlight the parallel method.
-%}
-%
-%\textbf{Response.}
-%The main contribution of this paper is 
-%to parallel generalization operators,
-%which is the first time that the parallelization 
-%is explicitly proposed.
-%The parallel merging operations must be well distributed,
-%which pushes the boundaries of tGAP and the SSC.
-%Because of the parallelization, 
-%we need to snap to the scales with completed generalization operations
-%and need to discuss the animation time gained for each generalization operation.
-%
-%We have added the above argument into the introduction.
-%
-%\rcomment{
-%5. If the animation duration of step (in Section 3.5) should be calculated by some initial values or
-%empirical value, such as zooming/panning duration?
-%}
-%
-%\textbf{Response.}
-%As no research has recommended values for 
-%the zooming factor or the zooming duration,
-%we respectively set the default values to $1$ and $1\,$s, 
-%which performed well according to our experience.
-%
-%We have added the above argument into
-%the section of Animation duration of a step.
-%
-%\rcomment{
-%6. In Section 4, the authors use only one topographic map 
-%with $13{,}238$ parcels to implement experiments. 
-%This dataset can prove the validity of the proposed method, 
-%however, it is not sure whether 
-%this method is useful or efficient 
-%for topographic map with more parcels.
-%}
-%
-%\textbf{Response.} For a topographic map with much more objects,
-%we will need to make $3$d tiles of the map data.
-%Then, the client side will dynamically load and process the map data 
-%for the place and the scale being viewed.
-%The client also needs to remove the loaded data that is not used for a while 
-%in order to release memory.
-%With those functionalities, our prototype will be able to handle 
-%a map with arbitrary number of area objects.
-%Those functionalities are under development 
-%and will be presented in another paper.
-%
-%We have added the above discussion into our future work.
-%
-%
-%\rcomment{
-%7. The other important problem of case study in Section~4, 
-%is that the comparison of $r_\mathrm{parallel}$ is not enough. 
-%The authors analysis experimental results according to Table~2 and 
-%only give an optimal parameter (0.01). 
-%If 0.01 is optimal for all datasets which is not used in this paper?
-%}
-%
-%\textbf{Response.} Parallel parameter~$0.01$ 
-%is a safe choice for any kind of dataset,
-%but we are far from claiming that value~$0.01$ is optimal
-%for all the kinds of datasets.
-%Finding optimal parallel parameters for 
-%different kinds of datasets are out the scope of this paper.
-%
-%We have added the discussion into our future work.
-%
-%
-%\rcomment{
-%8. The authors conclude this paper (Section 5) 
-%in detail which seems to be length. 
-%Moreover, the future work (Section 5.2) points out 
-%many problems of this proposed method, 
-%such as the definition of merging steps, 
-%the distribution of merging events and 
-%the simplification of boundaries. 
-%These issues imply the insufficiency of this work. 
-%Therefore, further development of this parallel operation
-%method is recommend.
-%}
-%
-%\textbf{Response.}
-%
-%
-%\section{Reviewer 2}
-%\setcounter{comments}{-1} %the counter will start from 0
-%
-%\rcommentnoskip{
-%The manuscript presents a method to support a better understanding of maps, and the authors also
-%developed an application that is very helpful for readers to get the “parallel” idea. This manuscript
-%was organized in a clear way and written well.
-%}
-%
-%\textbf{Response.} 
-%
-%
-%\rcomment{
-%The proposed method aims to improve user-friendly when zoom in and out a map, however, my
-%major concern also lies in the practical usage of this method. It seems that the authors try to avoid
-%the sense of “level” when a user zooming in and out a map, yet the advantage of using LOD (i.e.
-%fixed levels) was not discussed and compared with the proposed method. Using the pre-generated
-%tiles (image tile and vector tiles) can largely reduce the data transmission amount which can also
-%improve the experience of using a map (not only for web-based map applications but also for clientbased
-%map applications). In the demonstrative system, the most detailed data need to be loaded
-%before presenting the map. Such a way may not suitable for the general public as it requires waiting
-%a long time to see the map.
-%}
-%
-%\textbf{Response.}
-%
-%
-%
-%
-%
-%\rcomment{
-%Secondly, the memory cost of this method is also my concern. If map data in level-17 need to be
-%pre-loaded when a user just pan the map in level-10, the memory cost will apparently exceed. Is
-%the proposed method work in this manner? Is that possible to give some more detailed explanation
-%about the memory cost?
-%}
-%
-%\textbf{Response.} In our case study, all the data of the SSC is store in a single file
-%because the tested map is not very big.
-%The map will display only after the whole file is loaded.
-%For a topographic map with much more objects,
-%We are also developing a method that divides the SSC into many parts, 
-%and each part is stored in a file.
-%A file will be dynamically loaded when the user is reading the relevant place and scale of the map.
-%Further, a file at the client side will be removed to release main memory
-%if the corresponding part of map is not browsed for a long time. 
-%With those functionalities, our prototype will be able to handle 
-%a map with arbitrary number of area objects.
-%Those functionalities are under development 
-%and will be presented in another paper in future.
-%
-%We have added the above discussion in our future work.
-%
-%
-%\rcomment{
-%Thirdly, if the proposed method is not used in web-based scenarios, the multi-threading strategy
-%can be considered to improve efficiency. As web browsers (specifically, the JavaScript language) do
-%not support multi-threading, it is OK that merger different events into a step. It would be much
-%better if the authors illustrate the “big picture” more clearly.
-%}
-%
-%\textbf{Response.}
-%
-%\rcomment{
-%With all due respect, section 3.5 is a little bit simple and makes the article looks like a technical
-%report. The authors can also put more attention on the comparison with some other web-based map
-%applications which generally not employ animation.
-%}
-%
-%\textbf{Response.}
-%
-%
-%
-%\section{Reviewer 3}
-%\setcounter{comments}{-1} %the counter will start from 0
-%
-%
-%\rcommentnoskip{
-%This manuscript tries to explore the question of smooth zooming by paralleling generalization
-%operations. The idea is based on well known generalization model, GAP model, which is used to
-%process area feature generalization using the principle one parcel “eating” a neighbor. The
-%manuscript presents an innovation method in the merge integration to act as animation considering
-%interested focusing area. As each step just “eating” one unimportant parcel is a time-costing
-%process, the study distinguishes the interested area and the others, and for interested area, the
-%merge process can be carried out by detailed change using the presented control way. However, the
-%following questions need to care.
-%}
-%
-%\textbf{Response.} Thanks for the summary.
-%
-%We are sorry for the misunderstanding.
-%Different users may be interested into different area objects.
-%Therefore, they may have different interested areas.
-%However, our animation is independent of users' interested areas.
-%The merging is always realized by eating
-%(no matter the merging operation happens in the interested area).
-%We have made this more clearly
-%at the beginning of the section of methodology.
-%
-%
-%\rcomment{
-%1) The whole manuscript has a big question focusing on your own concrete point without introducing
-%the background in a general way from the perspective of map generalization or area feature
-%generalization. In the introduction, you used a lot of texts to explore your own point by very
-%detailed steps with figure 1 and figure 2. I expect to know the general introduction of your research
-%background. The references are also mainly from GAP based. However the other area feature
-%generalization need to discuss from a high level of perspective. I think in the introduction you
-%should at least consider the following : area feature aggregation, continuous generalization,
-%semantic neighbor process, parallel computations and others. I strongly suggest you move two
-%figures to section 3 method. Actually in current section 3, you continues to explain figure 1.
-%}
-%
-%\textbf{Response.} 
-%
-%We have moved Figures~1 and~2 to Section~3.
-%
-%\rcomment{
-%2) For the figure caption, 
-%you use a big paragraph with too many texts to describe meaning. 
-%I suggest to arrange the main description in the main text body and 
-%the caption should be simple and abstract the key ideas.
-%}
-%
-%\textbf{Response.} We have removed some texts 
-%in the captions of Figures~1, 2, and~4.
-%We have moved some texts of those figures into the main text body.
-%
-%\rcomment{
-%3) For the related works, the first sentence appears by your own reference followed by a list of other
-%papers without a background discussion. The related works mainly covers GAP, tGAP, SSC and other
-%topics, just within your team works. The perspective level should go up and consider some related
-%points in question 1 I mentioned.
-%}
-%
-%\textbf{Response.}
-%
-%
-%
-%\rcomment{
-%4) In the introduction and related works, 
-%you mentioned aggregation operation for land-use generation, 
-%another similar operation “amalgamation” needs to compare. 
-%If small parcels distribute
-%at a large region with very small gap distance to each other, 
-%the background parcel will eat all small parcels. 
-%Actually combining all neighboring small parcels together 
-%to be a big one is more reasonable. 
-%The question exists in the neighborhood definition. 
-%Those with small gap distance to
-%each other need also to be assigned to neighbors. 
-%The combination of this situation other than touch
-%relationship belongs to amalgamation. 
-%The early GAP model is short to process the neighbor with
-%small spatial distance, just considers the touching topological neighbor.
-%}
-%
-%\textbf{Response.} 
-%We have reviewed some papers about ``amalgamation'' 
-%in the section of related work.
-%
-%If some small parcels distribute at a large region,
-%then the background parcel will eat all the small parcels.
-%This case already happens in our web maps
-%when some small buildings are inside a settlement area.
-%In order to solve this problem, 
-%we could generate a tessellation of the small parcels
-%using the method of \citet{Ai2015Building}.
-%Then, we could grow each of the small parcels 
-%inside its own cell.
-%By then, the small parcels will touch each other
-%and can be merged by eating each other.
-%
-%We have added the above idea into our future work.
-%
-%
-%
-%
-%
-%
-%\rcomment{
-%5) In the method section, as for the duration costs, the measure method should present. The parcel
-%size, number and distribution density pattern can be considered to compute the merge speed in the
-%animation process.
-%}
-%
-%\textbf{Response.}
-%
-%
-%\rcomment{
-%6) The block process is a key question and depends on how interested area defines. To define
-%interested area, do you select certain parcel with some class type, some geometric characteristics
-%(big size), distribution in certain region or others ? If within one region, they are neighbors to each
-%other, how to process block?
-%}
-%
-%\textbf{Response.}
-%
-%
-%\rcomment{
-%7) Could you give an practical example using the same parcel data 
-%but different interested areas?
-%And make the comparison between two animation processes.
-%}
-%
-%\textbf{Response.} 
-%We are sorry for the misunderstanding.
-%Different users may be interested in different area objects, 
-%and our animation is independent of users' interested areas.
-%Therefore, it is impossible to make a comparison 
-%between two animation processes 
-%because the animation process is always the same.
-%
-%We have made this more clearly
-%at the beginning of the section of methodology.
-%
-%
-%\rcomment{
-%8) As for the animation process, suggest to improve the figures using some frames to illustrate the
-%progressive change rather than a final result.
-%}
-%
-%\textbf{Response.}
-%
-%
-%\rcomment{
-%For figure 10, using the progressive change of color brightness is a very easy job, why let it to be
-%future works. In the conclusions, too many future works exist. As for the skeleton process in GAP
-%model, the paper ``GAP tree extensions based on skeletons'' has settled. You can reference it.
-%}
-%
-%\textbf{Response.}
-%We have realized the progressive change of color brightness.
-%In the section of future work, we have referenced paper 
-%``GAP-tree extensions based on skeletons'' \citep{Ai2002GAP}. 
+\rcomment{
+Figure 6.  Should you really state the value of the simultaneous parameter here? 
+The greedy algorithms is not dependent on the value setting.
+}
+\textbf{Response.}
+No, we will not state the value here.
+
+\rcomment{
+Figure 1, page 2 row 43-48: 
+A more detailed description of the ``Eater'' is required. 
+It is not easy to understand what ``Eater'' is 
+in the context of the graphic figure.
+}
+\textbf{Response.}
+We will add a more detailed description.
+
+\rcomment{
+Figure 3: Would recommend that
+ three separate lists are used for the three workflow. 
+ That is, instead of 3A-O it should be 3A1-3A3, 3B1-3B7 and 3C1-3C5.
+  You also need to comment the figure p, q and r in the figure caption. 
+  When reading the text here it is not known what these figures refer to. 
+  This become not clear until a few pages later.
+}
+\textbf{Response.}
+We will improve it according to the comment.
+
+
+
+\rcomment{
+Page 8, row 39-42. Make a short note that 
+some of the attributes are inherited 
+(from the tGAPTopolObject superclass) .
+}
+\textbf{Response.}
+We will make the short note.
+
+\rcomment{
+Page 8 row 42: 
+Here you should comment the relationship
+ between ``$s_\mathrm{low}$'' - ``$s_\mathrm{high}$'' 
+ with the s value used in the flowchart in Figure 5.
+}
+\textbf{Response.}
+We will do that.
+
+\rcomment{
+Equation 2: Both $s$ and ``$s_\mathrm{high}$'' are input to the function. 
+Not only ``$s_\mathrm{high}$''.
+}
+\textbf{Response.}
+Both ``$s_\mathrm{high}$'' and ``$S_\mathrm{high}$'' are inputs.
+
+
+\rcomment{
+Table 1b: Is the value of fid 10 really correct? Could "smerge" be lower than "sslow"
+}
+\textbf{Response.}
+No, the value was wrong. We have fixed the problem.
+
+\rcomment{
+Page 9, row 26 left (right). "shigh" is a vector. Normally a vector is written in bold (and not italics)
+}
+\textbf{Response.}
+\noticecomment{Shall we change the notation?}.
+
+\rcomment{
+Figure 8. Is there any reference in the text to this figure?
+}
+\textbf{Response.}
+No, we will add.
+
+\rcomment{
+Figure 10a: Do not get which are the overview map is of.
+}
+\textbf{Response.}
+We will mark it in Figure 9b.
+
+\rcomment{
+Page 12, row 56-60. Be more explicit that the sequential and simultaneous approach is compared here.
+}
+\textbf{Response.}
+Sure, we will do that.
+
+
+\rcomment{
+Figure 11. For me this figure is not that interesting. The main contribution of the simultaneous approach is how the dynamics is improved. A figure that shows the difference at a certain point in time is not that interesting in my view (if I interpret this figure right). Consider to remove this figure.
+}
+\textbf{Response.}
+\noticecomment{Shall we remove this figure?}.
+
+\rcomment{
+Page 13, row 41, right column. There is a grammatical error here "objects, We"
+}
+\textbf{Response.}
+We will fix this error.
+
+\rcomment{
+Page 14 row 27-28. It is not easy to understand how the mthod of Ai would solve this issue.
+}
+\textbf{Response.}
+We will try to explain more.
+
+\rcomment{
+Page 14, row 10-14 right column. Here you bring up label placement on a few row. If you include labels you need to explain more about how labels should act in the context of smooth generalization. And also how the two references for label placement are connected to this approach. For me this part feels very uncertain and I would recommend the authors to remove these sentences.
+}
+\textbf{Response.}
+We will remove them.
+
+\rcomment{
+Page 14. Row 18-25 right column. Here the authors mention the approach of whether the foreground or background should be visible for zooming in and out. This is of course a topic, but hardly the main topic when it comes to integrating thematic information to the SSC. The harmonization of scale levels in the foreground and background (and object relationships) is a much more tricky problem that needs to be solved if the SSC can be used as a base map for thematic information.
+}
+\textbf{Response.}
+\noticecomment{Shall we remove this point?} 
+
+\rcomment{
+Reference. Some references starting with S and T are not in alphabetic order.
+}
+\textbf{Response.}
+We will fix the problem.
+
+\rcomment{
+Appendix A. The tables need to more explained. Otherwise it is very hard to understand the SQL statements.
+}
+\textbf{Response.}
+We will explain more.
+
+\rcomment{
+Appendix. The numbering of equation should not be 8 etc. Rater B1 etc.
+}
+\textbf{Response.}
+We will fix it.
+
+
+
+
+\section{Reviewer 2}
+\setcounter{comments}{-1} %the counter will start from 0
+
+\rcommentnoskip{
+The manuscript presented a simultaneous generalization method with progressive transformation effects. Using the example of land-use parcel merging explains the idea of progressive transformation process. The whole manuscript discussed a complete process including the basic idea, the algorithm process, the attached data and web coding source. The presented method is an innovation strategy in map generalization to reflect the detailed scale transformation and other temporal change. The following comments can be referenced.
+}
+\textbf{Response.} 
+Thanks for the summary!
+
+\rcomment{
+The abstract writing needs to use more induction texts to summarize the main ideas of this method from a high level perspective, rather than detailed process description. The advantages and applications of this method needs to evaluate.
+}
+\textbf{Response.}
+Sure, we will improve the abstract.
+
+\rcomment{
+The gradual operation of map generalization is the main idea in the manuscript. In the introduction it needs to discuss this question deeply. Jump from the concrete merging operation and from a common perspective discuss the concept gradual generalization. The characteristics, advantages, applications of this new method is expected to use more texts to describe. Suggest consider the generalization of temporal evolution phenomena, such as soil, flooding region.
+}
+\textbf{Response.}
+\noticecomment{Should we mention 
+the generalization of temporal evolution phenomena, such as soil, flooding region?}
+
+We will try to discuss more deeply
+
+\rcomment{
+The progressive transformation in web generalization can be referenced citing some related papers.
+}
+\textbf{Response.}
+Sure, we will cite those related papers.
+
+\rcomment{
+As for the polygon generalization, in section 2 you mentioned aggregation, merging and others. The difference of aggregation, amalgamation and merging needs to distinguish.
+}
+\textbf{Response.}
+Sure, we will do that.
+
+\rcomment{
+In the section of methodology, reference TGAP, SSC by citation and miss some contents. Suggest describe these two models using detailed texts since they are important support in the manuscript.
+}
+\textbf{Response.}
+We will do that.
+
+\rcomment{
+The figure 4 needs to explain in detail. What is the difference between left and right? How to reflect the merging event in SSC?
+}
+\textbf{Response.}
+We will add more details.
+
+\rcomment{
+As for the gradual merging operation, you mentioned several times in the manuscript. But how to realize in geometric process , how to triangulate and how to using triangle cell to gradually eating the neighbor, needs to use a proper figure to illustrate these processes. This question plays an important role in the manuscript.
+}
+\textbf{Response.}
+We can borrow a figure from another paper.
+
+\rcomment{
+How to define the granularity in the gradual merging if considering the scale change range? The change granularity for the merging From 1:10K to 1:50K and 1:10K to 1:100K should be different, I think. Considers the time costs, a large scale change range needs to more time and correspondingly coarse details.
+}
+\textbf{Response.}
+For a zooming operation, there is a relationship between scale and time.
+
+\rcomment{
+Based on GAP model, the minor areas need to arrange in a linear sequence according to the importance. If some are in the similar importance level, and may be neighbor to each other, how to process in your block and eating strategy?
+}
+\textbf{Response.}
+They have to be merged one by one.
+
+
+
+
 
 
 
