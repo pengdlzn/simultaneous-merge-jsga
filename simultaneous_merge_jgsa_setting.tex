@@ -43,7 +43,8 @@
 \usepackage{xurl} %make a link to break at the page margin
 \usepackage{booktabs} %for \toprule
 
-
+\usepackage{enumitem} % for environment enumerate, \begin{itemize}
+\setlist[enumerate]{itemsep=0mm}
 
 
 
@@ -106,6 +107,9 @@
 \newcommand{\eg}{e.g.,}
 \newcommand{\ie}{i.e.,}
 
+
+\newcommand*{\mine}[1]{{\color{red}#1}}
+%\newcommand*{\mine}[1]{{#1}}
 
 \makeatletter
 \def\verbatim@font{\normalfont\rmfamily}
