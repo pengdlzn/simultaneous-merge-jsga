@@ -46,23 +46,29 @@
 \tableofcontents
 
 \begin{abstract}
-%We submitted an earlier version of this paper to 
-%\emph{International Journal of Geographical Information Science}
-%on May 27, 2020.
-%According to the criticisms of the reviewers,
-%the Associate Editor, Professor Bo Huang, rejected that version.
-%However, Bo would welcome a new submission with substantial reworking 
-%of that version taking into consideration the reviewers' comments. 
-%
-%We thank all the anonymous reviewers for their comments.
-%These comments were very helpful for us to improve our paper. 
-%In this document, 
-%we provide detailed responses to each of the reviewers' comments. 
-%The following list summarizes our most important changes:
-%\begin{itemize}
-%    \item  change 1.
-%    \item  change 2.
-%\end{itemize}
+We submitted an earlier version of this paper to 
+\emph{Journal of Geovisualization and Spatial Analysis}
+on September 27, 2021.
+According to the concerns of the reviewers,
+the Editor in Chief, Prof. Haowen Yan, 
+suggested that we should incorporate major revisions.
+
+
+We thank the anonymous reviewers for their comments.
+These comments were very helpful for us to improve our paper. 
+In this document, 
+we provide detailed responses to each of the reviewers' comments. 
+The following list summarizes our most important changes:
+\begin{itemize}
+    \item We have used more induction texts in our abstract 
+    to present the whole picture.
+    \item We have moved some discussions to more proper places
+    so that the paper is more easily to be understood.
+    \item We have improved the description of the greedy algorithm.
+    \item We have explained many concepts better in the related work
+    (\eg~merging, amalgamation, aggregation, GAP, tGAP, and Eater).
+    \item We have explained more about the tables in Appendix A.    
+\end{itemize}
 \end{abstract}
 
 \section{Reviewer 1}
@@ -76,14 +82,14 @@ The main idea of this paper (performing simultaneous smooth zooming in the conte
 
 
 \rcomment{
-When starting reading the paper I missed a statement by the author in which way they wanted to perform the simultaneous generalization. Since working with e.g. SSC prohibit connected objects to be treated a choice has to be made of how to select the object. But the author do not really describe their ideal situation. This topic is, however, treated in the later part of the paper (page 11 row 33-44 (right) page 13 row 37-53) where they discuss the shortcoming of the proposed greedy algorithms if a too large value of the simultaneous parameter is used (which is a quite obvious effect). It would be good if the author could bring up this topic early in the paper (and later refer back to their vision when they know the result).
+When starting reading the paper, I missed a statement by the author in which way they wanted to perform the simultaneous generalization. Since working with e.g. SSC prohibit connected objects to be treated, a choice has to be made of how to select the object. But the authors do not really describe their ideal situation. This topic is, however, treated in the later part of the paper (page 11 row 33-44 (right) page 13 row 37-53) where they discuss the shortcoming of the proposed greedy algorithms if a too large value of the simultaneous parameter is used (which is a quite obvious effect). It would be good if the author could bring up this topic early in the paper (and later refer back to their vision when they know the result).
 }
 \textbf{Response.} 
-We can start discussing our simultaneous generalization 
-in the section of introduction.
-\noticecomment{What is our ideal situation? 
-Is it that the small areas distribute evenly on the map 
-so that few objects will be blocked?}
+The ideal situation to apply our method is that 
+small areas distribute evenly and the areas do not have holes.
+We have added this discussion at the end of Section 3.1
+and referred back to it later.
+
 
 
 
@@ -91,16 +97,20 @@ so that few objects will be blocked?}
 The weakest part of the paper is the description of the greedy algorithm (I might have made mistake while reading this part, but my impression is that this description really needs improvements).
 }
 \textbf{Response.} 
-Thanks for the feedback!
-We will improve our paper according to your comments 
-(see our responses below).
+We have significantly improved the description of the greedy algorithm
+(see Section 3.1).
 
 \rcomment{
-While reading it I got a bit uncertain of whether the greedy algorithm is in real time or if it is used in a preprocess. I might have missed something. Make sure this is clear.
+While reading it I got a bit uncertain of 
+whether the greedy algorithm is in real time or 
+if it is used in a preprocess. 
+I might have missed something. 
+Make sure this is clear.
 }
 \textbf{Response.} 
 The greedy algorithm is used in a preprocess.
-We will discuss this topic early in section ``A greedy algorithm''.
+We have made this clear just 
+before Section 3.1.
 
 \rcomment{
 State early in the description that 
@@ -111,23 +121,30 @@ This becomes clear in the sentence starting with
 but the reader needs this information earlier.
 }
 \textbf{Response.} 
-We will discuss this topic early in section ``A greedy algorithm''.
+We have bring the description to 
+the beginning of Section 3.1.
+
 
 
 \rcomment{
-Page 6 row 43 right. 
-Here you use $M_0$, while in start of Figure 6 $M_s$ is used.
+Page 6 row 43 right. Here you use $M_0$, 
+while in start of Figure 6 $M_s$ is used.
 }
 \textbf{Response.} 
-Do you mean page 6 row 25 right?
-$M_0$ is a case of $M_s$, which should be fine.
+$M_0$ is a case of $M_s$,
+where $s=0$.
+We have improved the description
+(see paragraph 2 of Section 3.1).
 
 \rcomment{
-Page 6, row 42 right. Has the termed ``blocked'' been described earlier?
+Page 6, row 42 right. 
+Has the termed ``blocked'' been described earlier?
 }
 \textbf{Response.}
-We used this term before, but we didn't describe it.
-We will do so.
+We used this term earlier without describing it.
+We have added the descriptions of 
+\emph{blocked areas} and \emph{free areas}
+in the paragraph before Section 3.1.
 
 \rcomment{
 Equation 1: You have to explain the symbols used 
@@ -141,35 +158,42 @@ refer to the ceiling function.
 Page 6 row 47 right. Is ``free area'' defined?
 }
 \textbf{Response.}
-We have added an explanation of ``free area'' 
-in the beginning of section Methodology.
+We have added the descriptions of 
+\emph{blocked areas} and \emph{free areas}
+in the paragraph before Section 3.1.
 
 \rcomment{
-Figure 6. In the caption you write that this is a process of 
+Figure 5. In the caption you write that this is a process of 
 ``merging events for a step''. 
-In the bottom of figure 5 it is stated ``all the steps''.
+In the bottom of figure 6 it is stated "all the steps".
 }
 \textbf{Response.}
-Figure 6 indeed presents the merging events for a single step,
-while Figure 5 finds merging events for all the steps.
-We made this clearer in the section of a greedy algorithm.
+The statements are correct.
+In the framework,
+We have marked the process of finding merging events for a single step.
 
 
 \rcomment{
-Figure 6.  Should you really state the value of the simultaneous parameter here? 
+Figure 6.  Should you really state 
+the value of the simultaneous parameter here? 
 The greedy algorithms is not dependent on the value setting.
 }
 \textbf{Response.}
-No, we have removed the value of the simultaneous parameter.
+The simultaneous parameter has influence on 
+how many merging events will be found in a single step.
+However, the parameter is not the focus of the figure,
+so we have removed the value of the simultaneous parameter.
+
 
 \rcomment{
-Figure 1, page 2 row 43-48: 
+Figure 1, page 3 row 43--48: 
 A more detailed description of the ``Eater'' is required. 
 It is not easy to understand what ``Eater'' is 
 in the context of the graphic figure.
 }
 \textbf{Response.}
-We will add a more detailed description.
+We have added more details to explain ``Eater''
+(see Section 2.2).
 
 \rcomment{
 Figure 3: Would recommend that
@@ -180,7 +204,8 @@ Figure 3: Would recommend that
   This become not clear until a few pages later.
 }
 \textbf{Response.}
-We will improve it according to the comment.
+We have relabeled the subfigures. 
+We have commented the extra subfigures in the caption.
 
 
 
@@ -190,7 +215,7 @@ some of the attributes are inherited
 (from the tGAPTopolObject superclass) .
 }
 \textbf{Response.}
-We have added a short note.
+We have added a short note in Section 3.2.
 
 \rcomment{
 Page 8 row 42: 
@@ -199,100 +224,117 @@ Here you should comment the relationship
  with the s value used in the flowchart in Figure 5.
 }
 \textbf{Response.}
-We have added a comment of the relationship.
+We have added some comments of the relationship.
 
 \rcomment{
-Equation 2: Both $s$ and ``$s_\mathrm{high}$'' 
-are input to the function. 
+Equation 2: Both $s$ and ``$s_\mathrm{high}$'' are input to the function. 
 Not only ``$s_\mathrm{high}$''.
 }
 \textbf{Response.}
 Both ``$s_\mathrm{high}$'' and ``$S_\mathrm{high}$'' are inputs.
-We have added ``$S_\mathrm{high}$'' as an input.
+Variable $s$ represents each of $S_\mathrm{high}$'s elements.
+We have added $S_\mathrm{high}$ as an input of Equation 2.
 
 
 \rcomment{
-Table 1b: Is the value of $f_\mathrm{id}$ 10 really correct? 
-Could $s_\mathrm{merge}$  be lower than $s_\mathrm{low}$
+Table 1b: Is the value of fid 10 really correct? Could "smerge" be lower than "sslow"
 }
 \textbf{Response.}
-No, the value was wrong. 
-We have fixed the problem.
+No, the value was wrong. We have fixed the problem.
 
 \rcomment{
-Page 9, row 26 left (right). "shigh" is a vector. Normally a vector is written in bold (and not italics)
+Page 9, row 26 left (right). "$S_\mathrm{high}$" is a vector. 
+Normally a vector is written in bold (and not italics)
 }
 \textbf{Response.}
-\noticecomment{Shall we change the notation?}.
+We have changed the notation. 
+Now, we use $\mathrm{\textbf{S}_{high}}$.
 
 \rcomment{
 Figure 8. Is there any reference in the text to this figure?
 }
 \textbf{Response.}
-Yes, Figure 8 is referred to 
-in the section of animation duration of a step.
+Yes, the reference is Section 3.5.
 
 \rcomment{
 Figure 10a: Do not get which are the overview map is of.
 }
 \textbf{Response.}
-We will mark it in Figure 9b.
+We have marked the part in Figure 10b
+(see the revised version).
 
 \rcomment{
-Page 12, row 56-60. Be more explicit that the sequential and simultaneous approach is compared here.
+Page 12, row 56--60. Be more explicit that 
+the sequential and simultaneous approach is compared here.
 }
 \textbf{Response.}
-Sure, we will do that.
+We have rephrased the beginning of the paragraph.
 
 
 \rcomment{
 Figure 11. For me this figure is not that interesting. The main contribution of the simultaneous approach is how the dynamics is improved. A figure that shows the difference at a certain point in time is not that interesting in my view (if I interpret this figure right). Consider to remove this figure.
 }
 \textbf{Response.}
-\noticecomment{Shall we remove this figure?}.
+We replaced the figure with a figure to expose a problem
+when simultaneous parameter $r_\mathrm{simul}= 0.1$.
 
 \rcomment{
 Page 13, row 41, right column. There is a grammatical error here "objects, We"
 }
 \textbf{Response.}
-We will fix this error.
+We have fixed this grammatical error.
 
 \rcomment{
 Page 14 row 27-28. It is not easy to understand how the mthod of Ai would solve this issue.
 }
 \textbf{Response.}
-We will try to explain more.
+After a careful consideration, 
+we don't think that the small parcels should grow and merge each other.
+If they do grow and merge each other, 
+they may fill the place of the background area,
+which is unreasonable.
+So, we have removed the paragraph. 
+
 
 \rcomment{
 Page 14, row 10-14 right column. Here you bring up label placement on a few row. If you include labels you need to explain more about how labels should act in the context of smooth generalization. And also how the two references for label placement are connected to this approach. For me this part feels very uncertain and I would recommend the authors to remove these sentences.
 }
 \textbf{Response.}
-We will remove them.
+Your suggestion makes sense.
+We have removed the discussion about label placement.
 
 \rcomment{
-Page 14. Row 18-25 right column. Here the authors mention the approach of whether the foreground or background should be visible for zooming in and out. This is of course a topic, but hardly the main topic when it comes to integrating thematic information to the SSC. The harmonization of scale levels in the foreground and background (and object relationships) is a much more tricky problem that needs to be solved if the SSC can be used as a base map for thematic information.
+Page 14. Row 18-25 right column. 
+Here the authors mention the approach of whether the foreground or background 
+should be visible for zooming in and out. 
+This is of course a topic, but hardly the main topic 
+when it comes to integrating thematic information to the SSC. 
+The harmonization of scale levels in the foreground and background 
+(and object relationships) 
+is a much more tricky problem that needs to be solved 
+if the SSC can be used as a base map for thematic information.
 }
 \textbf{Response.}
-\noticecomment{Shall we remove this point?} 
+We have removed this the discussion about the foreground and the background.
 
 \rcomment{
 Reference. Some references starting with S and T are not in alphabetic order.
 }
 \textbf{Response.}
-We will fix the problem.
+This is because we used ``\v{S}uba'' instead of ``{\v S}uba'' in the .bib file.
+We have fixed the problem.
 
 \rcomment{
 Appendix A. The tables need to more explained. Otherwise it is very hard to understand the SQL statements.
 }
 \textbf{Response.}
-We will explain more.
+We have explained more about the tables.
 
 \rcomment{
 Appendix. The numbering of equation should not be 8 etc. Rater B1 etc.
 }
 \textbf{Response.}
-We will fix it.
-
+We have numbered the equations according to your suggestion.
 
 
 
@@ -309,58 +351,88 @@ Thanks for the summary!
 The abstract writing needs to use more induction texts to summarize the main ideas of this method from a high level perspective, rather than detailed process description. The advantages and applications of this method needs to evaluate.
 }
 \textbf{Response.}
-Sure, we will improve the abstract.
+We have added more induction texts in the introduction,
+where we also presented the main advantage,
+which is to help map users better keep track of 
+their interested objects during zooming.
+We have also removed some sentences of the abstract.
+
 
 \rcomment{
 The gradual operation of map generalization is the main idea in the manuscript. In the introduction it needs to discuss this question deeply. Jump from the concrete merging operation and from a common perspective discuss the concept gradual generalization. The characteristics, advantages, applications of this new method is expected to use more texts to describe. Suggest consider the generalization of temporal evolution phenomena, such as soil, flooding region.
 }
 \textbf{Response.}
-\noticecomment{Should we mention 
-the generalization of temporal evolution phenomena, such as soil, flooding region?}
+We have discussed more deeply in the introduction.
 
-We will try to discuss more deeply
 
 \rcomment{
-The progressive transformation in web generalization can be referenced citing some related papers.
+The progressive transformation in web generalization 
+can be referenced citing some related papers.
 }
 \textbf{Response.}
-Sure, we will cite those related papers.
+We have added Section 2.5:
+Gradual transformation in web environment.
 
 \rcomment{
 As for the polygon generalization, in section 2 you mentioned aggregation, merging and others. The difference of aggregation, amalgamation and merging needs to distinguish.
 }
 \textbf{Response.}
-Sure, we will do that.
+We have added the differences of the three operators
+in the beginning of Section 2.
 
 \rcomment{
-In the section of methodology, reference TGAP, SSC by citation and miss some contents. Suggest describe these two models using detailed texts since they are important support in the manuscript.
+In the section of methodology, 
+reference TGAP, SSC by citation and miss some contents. 
+Suggest describe these two models using detailed texts since
+ they are important support in the manuscript.
 }
 \textbf{Response.}
-We will do that.
+We have added detailed texts to explain the GAP and the tGAP 
+in the section of gradual merging of area objects.
+There is already a detailed description of the SSC in the same section.
 
 \rcomment{
-The figure 4 needs to explain in detail. What is the difference between left and right? How to reflect the merging event in SSC?
+The figure 4 needs to explain in detail. 
+What is the difference between left and right? 
+How to reflect the merging event in SSC?
 }
 \textbf{Response.}
-We will add more details.
+We have added more details in the section of methodology
+(see paragraph 2 Section 3).
 
 \rcomment{
 As for the gradual merging operation, you mentioned several times in the manuscript. But how to realize in geometric process , how to triangulate and how to using triangle cell to gradually eating the neighbor, needs to use a proper figure to illustrate these processes. This question plays an important role in the manuscript.
 }
 \textbf{Response.}
-We can borrow a figure from another paper.
+We have added more details to explain ``Eater''
+(see Section 2.2).
+We have added a figure from
+\citet{Meijers2020Web}.
 
 \rcomment{
 How to define the granularity in the gradual merging if considering the scale change range? The change granularity for the merging From 1:10K to 1:50K and 1:10K to 1:100K should be different, I think. Considers the time costs, a large scale change range needs to more time and correspondingly coarse details.
 }
 \textbf{Response.}
-For a zooming operation, there is a relationship between scale and time.
+The amount of scale change is based on the zooming factor
+(see Equation C1 in Appendix C).
+The scale change influences the number of events
+(see Equation C2 in Appendix C).
+According to the number of events, 
+we can compute the number of steps.
+Finally, all the steps in a zooming duration 
+have the same merging time.
+We have added this explanation into Appendix C.
+
+
 
 \rcomment{
 Based on GAP model, the minor areas need to arrange in a linear sequence according to the importance. If some are in the similar importance level, and may be neighbor to each other, how to process in your block and eating strategy?
 }
 \textbf{Response.}
-They have to be merged one by one.
+In this case, only one of the minor areas is allowed to merged in a step.
+We have added an explanation of this case at the end of Section 3.1.
+Also the problem does happen in our case study 
+when we use simultaneous parameter $r_\mathrm{simul}=0.1$.
 
 
 
