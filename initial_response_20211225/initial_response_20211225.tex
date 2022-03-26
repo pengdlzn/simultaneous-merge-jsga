@@ -55,7 +55,8 @@ suggested that we should incorporate major revisions.
 
 
 We thank the anonymous reviewers for their comments.
-These comments were very helpful for us to improve our paper. 
+We have improved our paper according to the comments and
+marked most of the changes in red.
 In this document, 
 we provide detailed responses to each of the reviewers' comments. 
 The following list summarizes our most important changes:
@@ -67,7 +68,7 @@ The following list summarizes our most important changes:
     \item We have improved the description of the greedy algorithm.
     \item We have explained many concepts better in the related work
     (\eg~merging, amalgamation, aggregation, GAP, tGAP, and Eater).
-    \item We have explained more about the tables in Appendix A.    
+    \item We have explained more about the tables in Appendix A.     
 \end{itemize}
 \end{abstract}
 
@@ -85,10 +86,26 @@ The main idea of this paper (performing simultaneous smooth zooming in the conte
 When starting reading the paper, I missed a statement by the author in which way they wanted to perform the simultaneous generalization. Since working with e.g. SSC prohibit connected objects to be treated, a choice has to be made of how to select the object. But the authors do not really describe their ideal situation. This topic is, however, treated in the later part of the paper (page 11 row 33-44 (right) page 13 row 37-53) where they discuss the shortcoming of the proposed greedy algorithms if a too large value of the simultaneous parameter is used (which is a quite obvious effect). It would be good if the author could bring up this topic early in the paper (and later refer back to their vision when they know the result).
 }
 \textbf{Response.} 
-The ideal situation to apply our method is that 
-small areas distribute evenly and the areas do not have holes.
-We have added this discussion at the end of Section 3.1
+We have brought the topic to the end of Section 3.1
 and referred back to it later.
+The text we have added is that
+``The ideal situation to apply our method is that 
+small areas distribute evenly and the areas do not have holes.
+The reason is as follows.
+We wish to use a rather large simultaneous parameter~$r_\mathrm{simul}$
+so that many events can share their merging time.
+However, if the small areas do not distribute evenly,
+then some small areas will be blocked and kept 
+while some larger areas will be merged,
+which is unreasonable.
+If an area has many holes, where each hole is filled with an area, 
+then each step a hole merging into its surrounding area will forbid
+other holes to merge into it.
+This situation results in that 
+some holes are merged until the scale is very small.
+A typical example is that 
+a built-up area contains many buildings as holes.''
+
 
 
 
@@ -99,6 +116,15 @@ The weakest part of the paper is the description of the greedy algorithm (I migh
 \textbf{Response.} 
 We have significantly improved the description of the greedy algorithm
 (see Section 3.1).
+We used a dashed rectangle to mark the process of 
+finding merging events for a single step.
+We made items when describing the greedy algorithm
+so that the structure is clearer.
+Please also see our responses to other comments in this document.
+
+
+
+
 
 \rcomment{
 While reading it I got a bit uncertain of 
@@ -109,8 +135,14 @@ Make sure this is clear.
 }
 \textbf{Response.} 
 The greedy algorithm is used in a preprocess.
-We have made this clear just 
-before Section 3.1.
+We have added that
+``Note that the steps of 
+Sections 3.1, 3.2, and 3.3
+are done in a preprocess, and the final results are saved in files.
+Then the files are sent to the client on request
+when a user is browsing the map,
+where the steps of Section 3.3 and 3.4
+are done in real time.''
 
 \rcomment{
 State early in the description that 
@@ -121,8 +153,15 @@ This becomes clear in the sentence starting with
 but the reader needs this information earlier.
 }
 \textbf{Response.} 
-We have bring the description to 
-the beginning of Section 3.1.
+We have brought the description to 
+the beginning of Section 3.1,
+where the text is
+``We use a greedy algorithm 
+to find the simultaneous merging events for all the steps.
+The merging events will be stored as records in the tGAP database tables
+(see Figure 6).
+Some instances of the tables are shown in 
+Table 1 of Section 3.2.''
 
 
 
@@ -133,8 +172,8 @@ while in start of Figure 6 $M_s$ is used.
 \textbf{Response.} 
 $M_0$ is a case of $M_s$,
 where $s=0$.
-We have improved the description
-(see paragraph 2 of Section 3.1).
+We have added ``The process starts with a detailed map of area objects.
+The map is denoted by $M_s$, where state~$s$ is 0 at this point.''
 
 \rcomment{
 Page 6, row 42 right. 
@@ -142,17 +181,22 @@ Has the termed ``blocked'' been described earlier?
 }
 \textbf{Response.}
 We used this term earlier without describing it.
-We have added the descriptions of 
-\emph{blocked areas} and \emph{free areas}
-in the paragraph before Section 3.1.
+We have added 
+``In order to realize the requirement,
+we \emph{block} the pair of areas of a merging event
+as well as their neighbors.
+These areas become \emph{blocked areas}.
+The areas are \emph{free} 
+if they are not blocked yet.''
 
 \rcomment{
 Equation 1: You have to explain the symbols used 
 refer to the ceiling function in the where-sentence after the equation.
 }
 \textbf{Response.}
-We have added an explanation of the symbols used 
-refer to the ceiling function.
+We have added that
+expression $\lceil x \rceil$ returns the ceiling of $x$,
+which is the smallest integer greater than or equal to $x$.
 
 \rcomment{
 Page 6 row 47 right. Is ``free area'' defined?
@@ -160,16 +204,17 @@ Page 6 row 47 right. Is ``free area'' defined?
 \textbf{Response.}
 We have added the descriptions of 
 \emph{blocked areas} and \emph{free areas}
-in the paragraph before Section 3.1.
+in the paragraph before Section 3.1
+(also see our response to Reviewer 1 Comment 6).
 
 \rcomment{
 Figure 5. In the caption you write that this is a process of 
 ``merging events for a step''. 
-In the bottom of figure 6 it is stated "all the steps".
+In the bottom of figure 6 it is stated ``all the step''.
 }
 \textbf{Response.}
 The statements are correct.
-In the framework,
+In the flowchart,
 We have marked the process of finding merging events for a single step.
 
 
@@ -194,6 +239,21 @@ in the context of the graphic figure.
 \textbf{Response.}
 We have added more details to explain ``Eater''
 (see Section 2.2).
+In detail, we have added
+``First, the interior of the loser is triangulated
+with a Delaunay triangulation
+(see Figure 2a).
+Second, the triangles are visited starting from the boundary
+between the winner and the loser:
+If there are triangles with two shared edges, 
+then the visiting starts from the shared vertex of the two edges;
+otherwise, it starts from the shared edges.
+During visiting, the vertices of the triangles 
+are assigned with increasing $z$-values,
+and the tilted triangles are generated,
+which become the boundaries of polyhedra in the SSC.
+When slicing the SSC with a horizontal plane,
+the eating process is presented as shown in Figure 2b.''
 
 \rcomment{
 Figure 3: Would recommend that
@@ -204,8 +264,12 @@ Figure 3: Would recommend that
   This become not clear until a few pages later.
 }
 \textbf{Response.}
-We have relabeled the subfigures. 
-We have commented the extra subfigures in the caption.
+We have relabeled the subfigures according to the recommendation. 
+We have commented the extra subfigures in the caption,
+which is
+``Subfigures~(a4), (b8), (c6), and (c7) 
+are the map representations during the scale transitions,
+where their corresponding states are indicated by the gray dots.''
 
 
 
@@ -215,7 +279,9 @@ some of the attributes are inherited
 (from the tGAPTopolObject superclass).
 }
 \textbf{Response.}
-We have added a short note in Section 3.2.
+We have added in Section 3.2 that
+``Note that both class Face and class Edge inherit
+ the attributes from superclass tGAPTopolObject.''
 
 \rcomment{
 Page 8 row 42: 
@@ -224,7 +290,14 @@ Here you should comment the relationship
  with the s value used in the flowchart in Figure 5.
 }
 \textbf{Response.}
-We have added some comments of the relationship.
+We have added that
+``The values of $s_\mathrm{low}$ and $s_\mathrm{high}$
+are assigned when all the pairs of areas are merged
+(see the step in Figure 7).
+In detail, all those pairs of areas have 
+$s_\mathrm{high} = s + n_\mathrm{event}$,
+and the generated areas will have 
+$s_\mathrm{low} = s + n_\mathrm{event}$.''
 
 \rcomment{
 Equation 2: Both $s$ and ``$s_\mathrm{high}$'' are input to the function. 
@@ -237,7 +310,8 @@ We have added $S_\mathrm{high}$ as an input of Equation 2.
 
 
 \rcomment{
-Table 1b: Is the value of fid 10 really correct? Could "smerge" be lower than "sslow"
+Table 1b: Is the value of fid 10 really correct? 
+Could "smerge" be lower than "sslow"
 }
 \textbf{Response.}
 No, the value was wrong. We have fixed the problem.
@@ -254,7 +328,7 @@ Now, we use $\mathrm{\textbf{S}_{high}}$.
 Figure 8. Is there any reference in the text to this figure?
 }
 \textbf{Response.}
-Yes, the reference is Section 3.5.
+Yes, the reference is in Section 3.5.
 
 \rcomment{
 Figure 10a: Do not get which are the overview map is of.
@@ -269,6 +343,22 @@ the sequential and simultaneous approach is compared here.
 }
 \textbf{Response.}
 We have rephrased the beginning of the paragraph.
+Now, we have
+``Comparing to the map based on the single merging,
+the map based on the simultaneous merging indeed 
+provides smoother zooming.
+We set zooming factor~$f_\mathrm{zoom}=1$ and 
+zooming duration~$t_\mathrm{zoom}=1 s$ 
+(see Section 3.5).
+The map based on the single merging gives the impression
+of discrete scale transition, 
+where it is difficult to see a winner expands over a loser.\footnote{%
+See the web map at
+\url{https://congengis.github.io/webmaps/2021/10/merge/limburg-single-merging}.} 
+The reason is that the merging happens too fast,
+so the time for animation available is too short.
+This is also the case when 
+we use simultaneous parameter~$r_\mathrm{simul}= 0.001$.''
 
 
 \rcomment{
@@ -277,6 +367,14 @@ Figure 11. For me this figure is not that interesting. The main contribution of 
 \textbf{Response.}
 We replaced the figure with a figure to expose a problem
 when simultaneous parameter $r_\mathrm{simul}= 0.1$.
+We also added some text to describe the problem,
+where the description is
+``Figure 12 shows a problem 
+when we use simultaneous parameter $r_\mathrm{simul}= 0.1$.
+That is, some tiny and relatively unimportant areas stay 
+until the scale is quite small,
+where they should be merged when the scale is larger.
+This problem has been mentioned in Section 3.1.''
 
 \rcomment{
 Page 13, row 41, right column. There is a grammatical error here "objects, We"
@@ -315,28 +413,37 @@ is a much more tricky problem that needs to be solved
 if the SSC can be used as a base map for thematic information.
 }
 \textbf{Response.}
-We have removed this the discussion about the foreground and the background.
+We have removed the discussion about the foreground and the background.
 
 \rcomment{
 Reference. Some references starting with S and T are not in alphabetic order.
 }
 \textbf{Response.}
-This is because we used ``\v{S}uba'' instead of ``{\v S}uba'' in the .bib file.
+This is because we used  ``\textbackslash v\{S\}uba''
+instead of ``\{\textbackslash v S\}uba'' in the .bib file.
 We have fixed the problem.
 
 \rcomment{
 Appendix A. The tables need to more explained. Otherwise it is very hard to understand the SQL statements.
 }
 \textbf{Response.}
-We have explained more about the tables.
+We have added in the first paragraph of Appendix A that
+``In table \emph{class\_weights}, 
+field code stores the codes of the classes,
+and field weight stores the class weight.
+Table \emph{class\_comp\_matrix} 
+stores the distances and the compatibility values between the classes.
+The distance is defined based on a tree similar to Figure 3.
+The compatibility value is between 0 and 1.
+If two areas are with the same class, then the compatibility value is 1.''
 
 \rcomment{
 Appendix. The numbering of equation should not be 8 etc. Rater B1 etc.
 }
 \textbf{Response.}
-We have numbered the equations according to your suggestion.
+We have renumbered the equations according to the suggestion.
 
-
+\clearpage
 
 \section{Reviewer 2}
 \setcounter{comments}{-1} %the counter will start from 0
@@ -351,11 +458,17 @@ Thanks for the summary!
 The abstract writing needs to use more induction texts to summarize the main ideas of this method from a high level perspective, rather than detailed process description. The advantages and applications of this method needs to evaluate.
 }
 \textbf{Response.}
-We have added more induction texts in the introduction,
+We have added more induction text in the abstract,
 where we also presented the main advantage,
 which is to help map users better keep track of 
 their interested objects during zooming.
 We have also removed some sentences of the abstract.
+The added induction text is
+``the map should change correspondingly to present
+geographical information at proper levels.
+A way to help map users better keep track of their interested objects
+is to change the map smoothly.
+This paper focuses on the problem of providing smooth changes of area objects.''
 
 
 \rcomment{
@@ -363,7 +476,26 @@ The gradual operation of map generalization is the main idea in the manuscript. 
 }
 \textbf{Response.}
 We have discussed more deeply in the introduction.
-
+The added text is
+``The scale transition is realized by switching 
+between the maps at corresponding scales. 
+This strategy often brings large and discrete changes, 
+which confuse users.
+In order to provide users with better experience of zooming,
+we propose to realize the scale transition with smooth changes.
+In detail, each object on the map should be changed smoothly
+when the scale changes.
+For example, a smooth way to simplify a polyline is 
+to move some of the vertices to a straight line,
+and a smooth way to make a polygon disappear is to fade it out.
+Because all the objects are changed smoothly,
+users can more easily keep track of their interested objects.
+The technology to realize the smooth scale transition is known as
+\emph{continuous map generalization (CMG)}.''
+and
+``Further, CMG can be also used 
+to simulate some temporal evolution of phenomena,
+for example, how a flooding submerges land.''
 
 \rcomment{
 The progressive transformation in web generalization 
@@ -371,14 +503,27 @@ can be referenced citing some related papers.
 }
 \textbf{Response.}
 We have added Section 2.5:
-Gradual transformation in web environment.
+Gradual transformation in web environment,
+where we reviewed two more papers, which are
+\citet{Huang2016Webmap} and \citet{Peng2020Viewer}
 
 \rcomment{
 As for the polygon generalization, in section 2 you mentioned aggregation, merging and others. The difference of aggregation, amalgamation and merging needs to distinguish.
 }
 \textbf{Response.}
-We have added the differences of the three operators
-in the beginning of Section 2.
+We have explained the differences of the three operators
+in the beginning of Section 2,
+where the the text is
+``Merging, amalgamation, and aggregation  
+are three popular operators of combining area objects. 
+According to \citet{Shea1989Digital},
+merging combines neighbor objects, 
+which (visually) share their boundaries, into a single one,
+and the result has the same dimension as the merged objects.
+Amalgamation is different from merging in that 
+it combines nearby objects into a single one.
+In contrast, aggregation often involves the change of dimension.
+For example, points are aggregated into an area.''
 
 \rcomment{
 In the section of methodology, 
@@ -387,8 +532,24 @@ Suggest describe these two models using detailed texts since
  they are important support in the manuscript.
 }
 \textbf{Response.}
-We have added detailed texts to explain the GAP and the tGAP 
-in the section of gradual merging of area objects.
+We have added detailed text to explain the GAP and the tGAP 
+in Section 2.2.
+To explain the GAP, we have added
+``Each leaf node of the tree represents an area on the map.
+Then the least important area is found and 
+merged into its most compatible neighbor.
+Correspondingly, the former's node 
+becomes a child of the latter's node.
+This process repeats until the root node is found.
+As a result, the GAP tree has been built.
+Each level of the GAP tree corresponds to a scale of the map.
+As the changes between two neighbor levels of the tree are small,
+it is possible to realize scale transitions with small changes.''
+To explain the tGAP, we have added 
+``The topological GAP (tGAP) structure 
+consists of a face tree and an edge tree \citep{vanOosterom2005}.
+The aim of proposing the tGAP structure is to minimize the redundancy,
+where each vertex is recorded once while may be presented in many scales.''
 There is already a detailed description of the SSC in the same section.
 
 \rcomment{
@@ -397,17 +558,40 @@ What is the difference between left and right?
 How to reflect the merging event in SSC?
 }
 \textbf{Response.}
-We have added more details in the section of methodology
-(see paragraph 2 Section 3).
+We have added more details in the section of methodology,
+where the text is
+``The differences of the two SSCs result in 
+the two different merging processes.
+For example, at $z=50$ of Figure 5a, 
+there is only one polyhedron with the tilted face,
+hence there is only a pair of polygons merging in Figure 4b8.
+In comparison, there are two polyhedra
+with tilted faces at $z=50$ of Figure 5b,
+and there are two pairs of polygons merging in Figure 4c6.''
 
 \rcomment{
-As for the gradual merging operation, you mentioned several times in the manuscript. But how to realize in geometric process , how to triangulate and how to using triangle cell to gradually eating the neighbor, needs to use a proper figure to illustrate these processes. This question plays an important role in the manuscript.
+As for the gradual merging operation, you mentioned several times in the manuscript. But how to realize in geometric process , how to triangulate and how to use triangle cell to gradually eating the neighbor, needs to use a proper figure to illustrate these processes. This question plays an important role in the manuscript.
 }
 \textbf{Response.}
 We have added more details to explain ``Eater''
-(see Section 2.2).
-We have added a figure from
+in Section 2.2, and we have included a figure from
 \citet{Meijers2020Web}.
+The text added is 
+``First, the interior of the loser is triangulated
+with a Delaunay triangulation
+(see Figure 2a).
+Second, the triangles are visited starting from the boundary
+between the winner and the loser:
+If there are triangles with two shared edges, 
+then the visiting starts from the shared vertex of the two edges;
+otherwise, it starts from the shared edges.
+During visiting, the vertices of the triangles 
+are assigned with increasing $z$-values,
+and the tilted triangles are generated,
+which become the boundaries of polyhedra in the SSC.
+When slicing the SSC with a horizontal plane,
+the eating process is presented as shown in Figure 2b.''
+
 
 \rcomment{
 How to define the granularity in the gradual merging if considering the scale change range? The change granularity for the merging From 1:10K to 1:50K and 1:10K to 1:100K should be different, I think. Considers the time costs, a large scale change range needs to more time and correspondingly coarse details.
@@ -430,8 +614,9 @@ Based on GAP model, the minor areas need to arrange in a linear sequence accordi
 }
 \textbf{Response.}
 In this case, only one of the minor areas is allowed to merged in a step.
-We have added an explanation of this case at the end of Section 3.1.
-Also the problem does happen in our case study 
+We have added an explanation of this case at the end of Section 3.1
+(also see our response to Reviewer 1 Comment 1 in this document).
+The problem does happen in our case study 
 when we use simultaneous parameter $r_\mathrm{simul}=0.1$.
 
 

@@ -176,6 +176,9 @@ is an important step towards continuous map generalization.
 
 %\textbf{display triangles in the SSC examples}
 
+%{\color{red}Quote the changes and explanations.
+%    color the references.
+%    middle solution:sequence of all changes vs. all changes happen together}
 
 When users are reading a digital map,
 they expect different levels of detail (LoDs) depending on the scale.
@@ -840,7 +843,7 @@ In this way, it is easy for us to maintain the topology of the map.
 %than merging several areas into a single one.
 \mine{In order to realize the requirement,
 we \emph{block} the pair of areas of a merging event,
-and we also \emph{block} their neighbors.
+as well as their neighbors.
 These areas become \emph{blocked areas}.
 The areas are \emph{free} 
 if they are not blocked yet.}
@@ -857,10 +860,12 @@ as stopping halfway will result in showing slivers at a static state.
 In \sect\ref{sec:zooming_duration}, we define 
 the animation duration of zooming from one state to another state.
 \mine{Note that the steps of 
-\sects\ref{sec:greedy_algo} and \ref{sec:integrate_tgap} 
+\sects\ref{sec:greedy_algo}, \ref{sec:integrate_ssc}, and \ref{sec:integrate_tgap} 
 are done in a preprocess, and the final results are saved in files.
-The steps of \sects\ref{sec:snap} and \ref{sec:zooming_duration}
-are done in real time when users are browsing the maps.}
+Then the files are sent to the client on request
+when a user is browsing the map
+where the steps of \sects\ref{sec:snap} and \ref{sec:zooming_duration}
+are done in real time.}
 
 
 \subsection{A greedy algorithm}
@@ -1338,8 +1343,6 @@ is sent to the client side.
 
 According to how much a user has zoomed,
 the target scale, say, $1:S_\mathrm{t}$ can be computed.
-%According to \citet{Huang2016Webmap},
-%the number of merging events that should be processed can be computed by
 \citet{Huang2016Webmap} suggested that 
 the average density of the original map should be preserved 
 for a smaller-scale map.
