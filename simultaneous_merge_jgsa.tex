@@ -112,22 +112,21 @@ When users zoom in or out on a digital map,
 geographical information at proper levels.
 A way to help map users better keep track of their interested objects
 is to change the map smoothly.
-This paper focuses on the problem of providing smooth changes of area objects.
-The details are as following.}
+This paper focuses on the problem of providing smooth changes of area objects.}
 For zooming out, we merge the relatively unimportant areas into 
 their neighbors to form larger areas.
 In order to provide small and smooth changes,
 this paper merges a pair of areas by expanding one
 (winner) over the other (loser).
 At the same time, the loser gradually adapts its color to the winner.
-In order to prolong the smooth changes so that they are observable, 
+To prolong the smooth changes so that they are observable, 
 we propose to merge multiple areas simultaneously.
 \mine{In this way, the changes can share their animation durations}.
 We present a greedy algorithm to decide 
 which areas should be merged at each step.
 The merging process is pre-computed 
 and then is recorded into a space-scale cube (SSC).
-When a users browses our web map, 
+When a user browses our web map, 
 the SSC, together with some other necessary information,
 is sent to the client side 
 so that the map can be generated 
@@ -167,7 +166,8 @@ is an important step towards continuous map generalization.
 %by slicing the SSC in the Graphics Processing Unit (GPU).
 %We consider that generalizing simultaneously
 %is an important step towards continuous map generalization.
-\keywords{Space-scale cube \and vario-scale map \and continuous map generalization
+\keywords{Space-scale cube \and vario-scale map 
+\and continuous map generalization
 \and web map \and simultaneous generalization operations}
 \end{abstract}
 
@@ -195,7 +195,8 @@ maps of different scales and to send proper data to clients on request
 \citep[\eg][]{Hampe2004multiple}.
 \mine{The scale transition is realized by switching 
 between the maps at corresponding scales. 
-This strategy often brings large and discrete changes, which confuse users.
+This strategy often brings large and discrete changes, 
+which confuse users.
 In order to provide users with better experience of zooming,
 we propose to realize the scale transition with smooth changes.
 In detail, each object on the map should be changed smoothly
@@ -220,7 +221,7 @@ to transform road networks or river networks
 and to morph administrative boundaries
 \citep[\eg][]{Peng2016Admin}.
 \mine{Further, CMG can be also used 
-to simulate some temporal evolution phenomena,
+to simulate some temporal evolution of phenomena,
 for example, how a flooding submerges land.}
 
 
@@ -430,7 +431,7 @@ while the other two methods have limitations for some cases.
 For example, the two other methods do not work for certain concave polygons.
 The principle of the Eater is as follows (see \fig\ref{fig:eater}).
 \mine{First, the interior of the loser is triangulated
-to a Delaunay triangulation
+with a Delaunay triangulation
 (see \fig\ref{fig:eater}a).
 Second, the triangles are visited starting from the boundary
 between the winner and the loser:
@@ -440,7 +441,7 @@ otherwise, it starts from the shared edges.
 During visiting, the vertices of the triangles 
 are assigned with increasing $z$-values,
 and the tilted triangles are generated,
-which become the boundaries of polydra in the SSC.
+which become the boundaries of polyhedra in the SSC.
 When slicing the SSC with a horizontal plane,
 the eating process is presented as shown in \fig\ref{fig:eater}b.}
 
@@ -567,7 +568,7 @@ between the server side and the client side.
 They proposed different strategies of assigning 
 the work of processing map data
 according to the machine abilities of the clients
-(\ie~thim, medium, or thick client).
+(\ie~thin, medium, or thick client).
 Their implementation or \emph{option C}
 supports gradual transformation of objects.
 For a zooming operation, that implementation
@@ -652,7 +653,7 @@ so that the contents of the SSC in the figures can be better observed.
 serve for the single smooth merging (\fig\ref{fig:intro}b1--\ref{fig:intro}b7) 
 and simultaneous smooth merging (\fig\ref{fig:intro}c1--\ref{fig:intro}c5).}
 
-\mine{The differences of the two SSCs results in 
+\mine{The differences of the two SSCs result in 
 the two different merging processes.
 For example, at $z=50$ of \fig\ref{fig:ssc}a, 
 there is only one polyhedron with the tilted face,
@@ -934,7 +935,7 @@ n_\mathrm{target} =
 \lceil r_\mathrm{simul} \cdot |M_s| \rceil,
 \end{equation}
 where \mine{expression $\lceil x \rceil$ returns the ceiling of $x$,
-which is the least integer greater than or equal to $x$.}
+which is the smallest integer greater than or equal to $x$.}
 The ceiling function guarantees~$n_\mathrm{target}\ge 1$.
 That is to say, the greedy algorithm 
 finds one merging event at least for each step.
@@ -951,8 +952,8 @@ to represent the number of events that actually happen within the step.
 \includegraphics[page=4]{methodology}
 \caption{The flowchart of our greedy algorithm.
 \mine{This algorithm finds the merging event for all the steps.
-The dashed rectangle marked the process of
-finds merging events for a single step.}
+The dashed rectangle marks the process of
+finding merging events for a single step.}
 }
 \label{fig:greedy_framework}
 \end{figure*}
@@ -965,7 +966,8 @@ finds merging events for a single step.}
     (a) From all the free areas,
 	the least important one is selected to merge into
 	its most compatible neighbor.
-	Then, \mine{the two areas and} the surrounding areas are blocked (marked by the crosses).
+	Then, \mine{the two areas and} the surrounding areas are blocked 
+	(marked by the crosses).
 	(b) Next, the least important area from the remaining free areas
 	is selected to merge with its most compatible neighbor,
 	and the relevant areas are also blocked.
@@ -1026,7 +1028,7 @@ used here to explain the principle in an artificial simple example).
 
 \mine{The ideal situation to apply our method is that 
 small areas distribute evenly and the areas do not have holes.
-The reason is as following.
+The reason is as follows.
 We wish to use a rather large simultaneous parameter~$r_\mathrm{simul}$
 so that many events can share their merging time.
 However, if the small areas do not distribute evenly,
@@ -1380,9 +1382,9 @@ smaller than or equal to $E_\mathrm{t}$.
 For zooming out, $E_\mathrm{t,snap}$ 
 is the closest value in $\mathrm{\textbf{S}_{valid}}$ that is 
 larger than or equal to $E_\mathrm{t}$.
-The way of snapping prevents $E_\mathrm{t,snap}$ from
-being the value before zooming;
-otherwise, the map will stay if the map user zooms only a little bit.
+This way of snapping prevents $E_\mathrm{t,snap}$ from
+being the same value before zooming;
+otherwise, the map will stay the same if the map user zooms only a little bit.
 } 
 The scale denominator corresponding to event number~$E_\mathrm{t,snap}$
 can be computed by 
@@ -1698,7 +1700,7 @@ where it is difficult to see a winner expands over a loser.\footnote{%
 See the web map at
 \url{https://congengis.github.io/webmaps/2021/10/merge/limburg-single-merging}.} 
 The reason is that the merging happens too fast,
-so the animation time is too short.
+so the time for animation available is too short.
 This is also the case when 
 we use simultaneous parameter~$r_\mathrm{simul}= 0.001$.}
 We get the feeling of smooth merging when~$r_\mathrm{simul}= 0.01$.
@@ -1731,7 +1733,7 @@ when we use simultaneous parameter $r_\mathrm{simul}= 0.1$.
 That is, some tiny and relatively unimportant areas stay 
 until the scale is quite small,
 where they should be merged when the scale is larger.
-This problem is anticipated in \sect\ref{sec:greedy_algo}.}
+This problem has been mentioned in \sect\ref{sec:greedy_algo}.}
 The reason of the problem is that 
 there are many buildings in the middle of the map.
 When the buildings share the same surrounding area,
@@ -1828,13 +1830,13 @@ and each part is stored in a file.
 A file will be dynamically loaded 
 when the user is reading the relevant place and scale of the map.
 \mine{This strategy also allows progressive transfer of data
-\citet{vanOosterom2014Support}}.
+\citep{vanOosterom2014Support}}.
 Further, a file at the client side will be removed to release main memory
 if the corresponding part of map is not browsed for a long time. 
-With those functionalities, our prototype will be able to handle 
+With those functionalities, our prototype is able to handle 
 a map with arbitrary number of area objects.
-Those functionalities are under development 
-and will be presented in another paper in future.
+%Those functionalities are under development 
+%and will be presented in another paper in future.
 
 
 
@@ -1904,7 +1906,7 @@ it is necessary to simplify the boundaries of the areas.
 Many existing methods could be integrated into our simultaneous paradigm.
 \citet{Meijers2011LineSimp} proposed a method 
 to simplify the boundaries simultaneously. 
-Their results are topologically safe. 
+The results are topologically safe. 
 Another choice would be the method of \citet{ImaiIri1988},
 which is able to minimize the number of vertices 
 for a given error threshold.
